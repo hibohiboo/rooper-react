@@ -1,41 +1,39 @@
-import 'babel-polyfill'; // このファイルでes6の記法が使えるようにする
-import path from 'path';
-import webpack from 'webpack';
+
+var webpack = require('webpack');
 
 module.exports = {
   // src以下のソースをビルド対象とする
   context: __dirname + '/src',
   // エントリーポイントとしてapp.jsを起点にビルドする
   entry: {
-    todo: './todo/app-todo.js'
+    typescript: './app.tsx',
+    // code-splitting用の設定
+    vendor: ['react', 'react-dom', 'redux', 'react-redux']
   },
   // distにビルドしたファイルをbundle.jsの名前で保存
   output: {
     path: __dirname + '/dist',
-    filename: '[name].js'
+    filename: 'bundle.js'
   },
   // importするときに、以下の配列に登録した拡張子は省略できる
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".ts", ".tsx"]
   },
   module: {
     rules: [
-      // .js, .jsxに一致する拡張子のファイルはbabel-loaderを通してトランスパイル
-      { test: /\.jsx?$/,
-        exclude: /node_modules/,
-        // ビルド時に警告が出るのでcompact=falseを指定
-        loader: 'babel-loader?compact=false',
-        include: path.join(__dirname, 'src')
-      },
-      {test: /\.json$/, loaders: ['json-loader']}
+      // .ts, .tsxに一致する拡張子のファイルはts-loaderを通してトランスパイル
+      { test: /\.tsx?$/, exclude: /node_modules/, loader: "ts-loader" }
     ]
   },
-  // hot loadを有効にするためのプラグイン
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    // hot loadを有効にするためのプラグイン
+    new webpack.HotModuleReplacementPlugin(),
+    // code-splittingを有効にするプラグイン
+    new webpack.optimize.CommonsChunkPlugin({/* chunkName= */name: "vendor", /* filename= */ filename: "vendor.bundle.js"})
   ],
   // source-mapを出力して、ブラウザの開発者ツールからデバッグできるようにする。
-  devtool: '#cheap-module-eval-source-map',
+  // webpack-dev-serverなら不要？
+  // devtool: '#cheap-module-source-map',
   // 開発サーバの設定
   devServer: {
     // public/index.htmlをデフォルトのホームとする
