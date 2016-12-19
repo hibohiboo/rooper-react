@@ -17,7 +17,7 @@ module.exports = {
   },
   // importするときに、以下の配列に登録した拡張子は省略できる
   resolve: {
-    extensions: [".js", ".ts", ".tsx"]
+    extensions: [".js", ".tsx", ".ts"]
   },
   module: {
     rules: [

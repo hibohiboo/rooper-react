@@ -2,14 +2,11 @@ import * as React from 'react';
 import VisibleTodoList from '../containers/VisibleTodoList'
 import AddTodo from '../containers/AddTodo';
 import Footer from './Footer'
-import MastermindCard from './MastermindCard/index';
+import VisibleMastermindCard from '../containers/VisibleMastermindCard';
 
 const App = () => (
   <div>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
-    <MastermindCard />
+    <VisibleMastermindCard />
   </div>
 );
 

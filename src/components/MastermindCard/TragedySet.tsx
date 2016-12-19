@@ -9,9 +9,9 @@ interface IState {};
 class TragedySet extends React.Component<IProps, IState> {
   render(): JSX.Element{
     return (
-        <div>
-          {this.props.name}
-        </div>
+      <div>
+        {this.props.name}
+      </div>
     );
   }
  }

@@ -1,4 +1,5 @@
 import { Character, IllegularCharacter } from '../../models/character';
+
 export const CHARACTERS: Character[] = function(){
   var chars:any = [
     {"id": 1,  "name": "男子学生",   "paranoia_limit": 2},
