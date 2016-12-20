@@ -1,5 +1,5 @@
-
-var webpack = require('webpack');
+import 'babel-polyfill';
+import webpack from 'webpack';
 
 module.exports = {
   // src以下のソースをビルド対象とする
@@ -22,7 +22,7 @@ module.exports = {
   module: {
     rules: [
       // .ts, .tsxに一致する拡張子のファイルはts-loaderを通してトランスパイル
-      { test: /\.tsx?$/, exclude: /node_modules/, loader: "ts-loader" }
+      { test: /\.tsx?$/, exclude: /node_modules/, loaders:["babel-loader", "ts-loader"] }
     ]
   },
   plugins: [

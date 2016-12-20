@@ -13,7 +13,7 @@ RUN npm i --save react
 RUN npm i --save react-dom
 
 # jsフレームワークredux
-RUN npm i --save-dev redux
+RUN npm i --save redux
 RUN npm i --save react-redux
 
 # typescript
@@ -25,6 +25,16 @@ RUN npm i --save-dev webpack@2.2.0-rc.0
 # 開発用サーバ
 RUN npm i --save-dev webpack-dev-server@2.2.0-rc.0
 
+# es6トランスパイラ
+RUN npm i --save babel-polyfill
+RUN npm i --save-dev babel-core 
+RUN npm i --save-dev babel-preset-es2015
+RUN npm i --save-dev babel-preset-stage-0
+RUN npm i --save-dev babel-preset-react
+
+# webpack用babel loader
+RUN npm i --save-dev babel-loader
+
 # webpack用typescript loader
 RUN npm i --save-dev ts-loader
 
@@ -33,3 +43,8 @@ RUN npm i --save-dev @types/react
 RUN npm i --save-dev @types/react-dom
 RUN npm i --save-dev @types/redux
 RUN npm i --save-dev @types/react-redux
+
+# httpライブラリ axios
+RUN npm i --save axios
+
+RUN npm i --save-dev @types/axios
