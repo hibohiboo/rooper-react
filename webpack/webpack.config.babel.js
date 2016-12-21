@@ -6,9 +6,9 @@ module.exports = {
   context: __dirname + '/src',
   // エントリーポイントとしてapp.jsを起点にビルドする
   entry: {
-    typescript: './app.tsx',
+    typescript: ['./app.tsx'],
     // code-splitting用の設定
-    vendor: ['react', 'react-dom', 'redux', 'react-redux']
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'babel-polyfill']
   },
   // distにビルドしたファイルをbundle.jsの名前で保存
   output: {
@@ -17,13 +17,17 @@ module.exports = {
   },
   // importするときに、以下の配列に登録した拡張子は省略できる
   resolve: {
-    extensions: [".js", ".tsx", ".ts"]
+    extensions: [".js", ".jsx", ".tsx", ".ts", ".json"]
   },
   module: {
     rules: [
-      // .ts, .tsxに一致する拡張子のファイルはts-loaderを通してトランスパイル
-      { test: /\.tsx?$/, exclude: /node_modules/, loaders:["babel-loader", "ts-loader"] }
+      // .ts, .tsxに一致する拡張子のファイルはts-loader -> babel-loaderを通してトランスパイル
+      { test: /\.tsx?$/, exclude: /node_modules/, loaders:["babel-loader", "ts-loader"] },
+      // .js, .jsxに一致するファイルはbabel-loaderを通してコンパイル
+      { test: /\.js(x?)$/, exclude: /node_modules/, loaders:["babel-loader"] },
+      { test: /\.json$/, exclude: /node_modules/, loaders:["json-loader"] },
     ]
+    
   },
   plugins: [
     // hot loadを有効にするためのプラグイン

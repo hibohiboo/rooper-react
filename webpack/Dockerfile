@@ -29,8 +29,10 @@ RUN npm i --save-dev webpack-dev-server@2.2.0-rc.0
 RUN npm i --save babel-polyfill
 RUN npm i --save-dev babel-core 
 RUN npm i --save-dev babel-preset-es2015
-RUN npm i --save-dev babel-preset-stage-0
 RUN npm i --save-dev babel-preset-react
+# awaitを使用するためにes2017導入
+RUN npm i --save-dev babel-preset-es2016
+RUN npm i --save-dev babel-preset-es2017
 
 # webpack用babel loader
 RUN npm i --save-dev babel-loader
@@ -46,5 +48,7 @@ RUN npm i --save-dev @types/react-redux
 
 # httpライブラリ axios
 RUN npm i --save axios
-
 RUN npm i --save-dev @types/axios
+
+# webpack用json loader
+RUN npm i --save-dev json-loader
