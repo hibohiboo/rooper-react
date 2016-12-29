@@ -1,5 +1,5 @@
 {
-  "name": "First Step",
+  "name": "First Steps",
   "subplotNum":1,
   "plotList": [
     {"type":"M","name":"殺人計画",           "roles":["キラー", "クロマク","キーパーソン"], "rules":[]},
