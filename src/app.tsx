@@ -5,14 +5,15 @@ import App from './components/App';
 import { createStore } from 'redux';
 import reducers from './reducers';
 import { addScenario, selectTragedySet  } from './actions';
-import {getTragedySet} from './reducers/services/TragedySetService';
+import { getTragedySet } from './services/TragedySetService';
+import { TragedySetType } from './models/TragedySet';
 import * as axios from 'axios';
 
 const store = createStore(reducers);
 store.dispatch(addScenario());
 
 (async ()=>{
-  const res = await axios.get('/tragedySets/basicTragedy.json');
+  const res = await getTragedySet(TragedySetType.basic);
   const data:any = res.data;
   store.dispatch(selectTragedySet(data));
 })();

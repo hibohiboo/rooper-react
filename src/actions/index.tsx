@@ -10,9 +10,22 @@ export interface ICreateAction extends Action {
 
 export interface ISelectTragedySetAction extends Action {
   type: 'SELECT_TRAGEDY_SET';
-  set:TragedySet;
+  set: TragedySet
 }
 
+export interface FETCH_GET_REQUEST extends Action{
+  type: 'FETCH_GET_REQUEST'
+}
+
+export interface FETCH_GET_FAILURE extends Action{
+  type: 'FETCH_GET_FAILURE',
+  error:string
+}
+
+export interface FETCH_GET_SUCCESS extends Action{
+  type: 'FETCH_GET_FAILURE',
+  response: any;
+}
 
 export type TodoActions = IAddTodoAction | IToggleTodoAction;
 

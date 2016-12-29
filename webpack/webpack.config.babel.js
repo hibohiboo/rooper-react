@@ -8,7 +8,7 @@ module.exports = {
   entry: {
     typescript: ['./app.tsx'],
     // code-splitting用の設定
-    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'babel-polyfill']
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'axios', 'babel-polyfill']
   },
   // distにビルドしたファイルをbundle.jsの名前で保存
   output: {
@@ -27,7 +27,6 @@ module.exports = {
       { test: /\.js(x?)$/, exclude: /node_modules/, loaders:["babel-loader"] },
       { test: /\.json$/, exclude: /node_modules/, loaders:["json-loader"] },
     ]
-    
   },
   plugins: [
     // hot loadを有効にするためのプラグイン

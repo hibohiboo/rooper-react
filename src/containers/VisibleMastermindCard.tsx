@@ -8,9 +8,6 @@ interface IState{
 
 const mapStateToProps = (store:IState, ownProps) => {
   let tragedySetName:string = '';
-  console.log('mapState');
-  console.log(store.scenario);
-  console.log(store.scenario.selectedSet.name);
   if(store.scenario){
     tragedySetName = store.scenario.selectedSet.name;
   }

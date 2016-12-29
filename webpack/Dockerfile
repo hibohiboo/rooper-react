@@ -1,6 +1,6 @@
 # docker-hubからnode入りコンテナを取得
 # https://hub.docker.com/_/node/
-FROM node:7.2.1
+FROM node:7.3.0
 
 # コンテナ上の作業ディレクトリ作成
 WORKDIR /my_webpack
@@ -15,6 +15,9 @@ RUN npm i --save react-dom
 # jsフレームワークredux
 RUN npm i --save redux
 RUN npm i --save react-redux
+
+# httpライブラリ axios
+RUN npm i --save axios
 
 # typescript
 RUN npm i --save-dev typescript@next
@@ -40,15 +43,13 @@ RUN npm i --save-dev babel-loader
 # webpack用typescript loader
 RUN npm i --save-dev ts-loader
 
+# webpack用json loader
+RUN npm i --save-dev json-loader
+
 # typescriptの型定義ファイル
 RUN npm i --save-dev @types/react
 RUN npm i --save-dev @types/react-dom
 RUN npm i --save-dev @types/redux
 RUN npm i --save-dev @types/react-redux
-
-# httpライブラリ axios
-RUN npm i --save axios
 RUN npm i --save-dev @types/axios
 
-# webpack用json loader
-RUN npm i --save-dev json-loader

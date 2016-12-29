@@ -1,0 +1,8 @@
+{
+  "name": "First Step",
+  "subplotNum":1,
+  "plotList": [
+    {"type":"M","name":"殺人計画",           "roles":["キラー", "クロマク","キーパーソン"], "rules":[]},
+    {"type":"S","name":"潜む殺人鬼",         "roles":["フレンド", "シリアルキラー"],         "rules":[]}
+  ]
+}
