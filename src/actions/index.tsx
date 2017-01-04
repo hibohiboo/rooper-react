@@ -2,6 +2,9 @@ import { Action } from 'redux';
 import { VisibilityFilterType } from '../states/VisibilityFilterType';
 import { TragedySet } from '../models/TragedySet';
 
+/**
+ * シナリオで使用されるアクション一覧
+ */
 export type ScenarioActions = ICreateAction | ISelectTragedySetAction;
 
 export interface ICreateAction extends Action {

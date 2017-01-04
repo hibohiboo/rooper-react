@@ -18,6 +18,10 @@ store.dispatch(addScenario());
   store.dispatch(selectTragedySet(data));
 })();
 
+/**
+ * reduxフレームワークを使用。  
+ * ビューはreact
+ */
 render(
   <Provider store={store}>
     <App />
