@@ -9,18 +9,23 @@ interface IProps extends Props<TragedySetForm>{
 interface IState {};
 
 class TragedySetForm extends React.Component<IProps, IState> {
-  public static selectNode:HTMLSelectElement;
+  constructor(public props: IProps) {
+    super(props);
+    console.log(props);
+  }
+  public selectedNode:HTMLSelectElement;
   render(): JSX.Element{
     return (
       <select
           ref={(node)=>{
-            TragedySetForm.selectNode = node;
+            this.selectedNode = node;
           }}
           value={this.props.id}
           onChange={(e) => {
            e.preventDefault();
-           const id:TragedySetType = parseInt(TragedySetForm.selectNode.value, 10);
-           this.props.onChange(id);
+           let selectedId = parseInt(this.selectedNode.value, 10);
+           this.props.onChange(selectedId);
+    console.log(this.props);
          }}>
         {tragedySetList.map((set) =>
           <option key={set.id} value={set.id}>{set.name}</option>

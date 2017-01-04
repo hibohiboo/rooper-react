@@ -18,9 +18,13 @@ interface IDispatchToProps{
 }
 
 const mapStateToProps = (store):IStateToProps => {
-  console.log(store);
+  let id = TragedySetType.basic;
+  if(store.scenario && store.scenario.selectedSet){
+    id = store.scenario.selectedSet.id; 
+  }
+  console.log(store.scenario.selectedSet);
   return { 
-    id: 1
+    id
   }
 }
 
