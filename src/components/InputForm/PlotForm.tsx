@@ -2,13 +2,12 @@ import * as React from 'react';
 import { Props, Component} from 'react';
 import {tragedySetList, TragedySetType} from '../../models/TragedySet';
 
-interface IProps extends Props<TragedySetForm>{
+interface IProps extends Props<PlotForm>{
   id: TragedySetType;
-  onChange: any; 
 };
 interface IState {};
 
-class TragedySetForm extends React.Component<IProps, IState> {
+class PlotForm extends React.Component<IProps, IState> {
   constructor(public props: IProps) {
     super(props);
   }
@@ -19,13 +18,7 @@ class TragedySetForm extends React.Component<IProps, IState> {
           ref={(node)=>{
             this.selectedNode = node;
           }}
-          value={this.props.id}
-          onChange={(e) => {
-           e.preventDefault();
-           let selectedId = parseInt(this.selectedNode.value, 10);
-           this.props.onChange(selectedId);
-    console.log(this.props);
-         }}>
+          value={this.props.id}>
         {tragedySetList.map((set) =>
           <option key={set.id} value={set.id}>{set.name}</option>
         )}
@@ -34,4 +27,4 @@ class TragedySetForm extends React.Component<IProps, IState> {
   }
  }
 
- export default TragedySetForm;
+ export default PlotForm;
