@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typedoc": "typedoc",
-    "doc": "npm run typedoc -- --target es6 --jsx react --ignoreCompilerErrors --out ./dist/ ./src/"
+    "doc": "npm run typedoc -- --target es6 --jsx react --ignoreCompilerErrors --excludeExternals  --out ./dist/ ./src/"
   },
   "keywords": [],
   "author": "",
