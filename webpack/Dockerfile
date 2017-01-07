@@ -53,3 +53,7 @@ RUN npm i --save-dev @types/redux
 RUN npm i --save-dev @types/react-redux
 RUN npm i --save-dev @types/axios
 
+# material-ui
+RUN npm i --save material-ui
+RUN npm i --save-dev @types/material-ui
+RUN npm i --save react-tap-event-plugin

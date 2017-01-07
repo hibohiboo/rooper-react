@@ -24,8 +24,8 @@ const mapStateToProps = (store:IState, ownProps) => {
   }
 }
 
-const VisibleMastermindCard = connect(
+const VisibleMastermindCardContainer = connect(
   mapStateToProps
 )(MastermindCard);
 
-export default VisibleMastermindCard;
+export default VisibleMastermindCardContainer;
