@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Props, Component} from 'react';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 interface IPropsRuleY extends Props<RuleY>{
   name: string;
@@ -9,14 +10,14 @@ interface IState {};
 class RuleY extends React.Component<IPropsRuleY, IState> {
   render(): JSX.Element{
     return (
-      <tr>
-        <th>
+      <TableRow>
+        <TableHeaderColumn>
            ルールY
-        </th>
-        <td>
+        </TableHeaderColumn>
+        <TableRowColumn>
            {this.props.name}
-        </td>
-      </tr>
+        </TableRowColumn>
+      </TableRow>
     );
   }
  }
@@ -27,19 +28,27 @@ interface IPropsRuleX extends Props<RuleX>{
   maxNum: number;
 };
 
+const RuleXHeader = ({maxNum, num}) => (
+  <TableHeaderColumn>
+    {
+      (()=>{ return maxNum === 1 ? `ルールX` : `ルールX${num}`})()
+    }
+  </TableHeaderColumn>
+);
+
+const RuleXColumn = ({name}) =>(
+  <TableRowColumn>
+      {name}
+  </TableRowColumn>
+);
+
 class RuleX extends React.Component<IPropsRuleX, IState> {
   render(): JSX.Element{
     return (
-      <tr>
-        <th>
-          {
-            (()=>{ return this.props.maxNum === 1 ? `ルールX` : `ルールX${this.props.num}`})()
-          }
-        </th>
-        <td>
-           {this.props.name}
-        </td>
-      </tr>
+      <TableRow>
+        <RuleXHeader maxNum={this.props.maxNum} num={this.props.num} />
+        <RuleXColumn name={this.props.name} />
+      </TableRow>
     );
   }
  }
@@ -58,16 +67,16 @@ interface IProps extends Props<SelectedPlotList>{
 class SelectedPlotList extends React.Component<IProps, IState> {
   render(): JSX.Element{
     return (
-      <table>
-        <tbody>
+      <Table>
+        <TableBody>
           <RuleY name={this.props.mainPlot && this.props.mainPlot.name} />
           {
             this.props.subPlotList.map((rule, i) =>{
               return <RuleX key={i} name={rule.name} num={i+1} maxNum={this.props.subPlotNum} />;
             }
           )}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     );
   }
  }
