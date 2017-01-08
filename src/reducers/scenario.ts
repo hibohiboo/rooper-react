@@ -8,7 +8,7 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
     case 'SELECT_TRAGEDY_SET':
       return new Scenario(action.set);
     case 'SELECT_PLOT':
-      const selectedPlotList = action.oldPlot ? state.selectedPlotList.filter(plot=>plot.id!==action.oldPlot.id) : state.selectedPlotList;
+      const selectedPlotList = action.oldPlotId ? state.selectedPlotList.filter(plot=>plot.id!==action.oldPlotId) : state.selectedPlotList;
       return new Scenario(state.selectedSet, [...selectedPlotList, action.newPlot]);
     default:
       return state

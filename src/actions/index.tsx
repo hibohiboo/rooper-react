@@ -19,7 +19,7 @@ export interface ISelectTragedySetAction extends Action {
 export interface ISelectPlotAction extends Action {
   type: 'SELECT_PLOT';
   newPlot: Plot;
-  oldPlot: Plot;
+  oldPlotId: number;
 }
 
 export interface FETCH_GET_REQUEST extends Action{
@@ -51,10 +51,10 @@ export function selectTragedySet( set:TragedySet ):ISelectTragedySetAction{
   }
 }
 
-export function selectPlot( newPlot:Plot, oldPlot:Plot = null ):ISelectPlotAction{
+export function selectPlot( newPlot:Plot, oldPlotId:number = null ):ISelectPlotAction{
   return {
     type: 'SELECT_PLOT',
     newPlot,
-    oldPlot
+    oldPlotId
   }
 }
