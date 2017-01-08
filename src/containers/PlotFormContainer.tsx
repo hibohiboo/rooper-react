@@ -2,21 +2,21 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import PlotForm from '../components/InputForm/PlotForm';
 import { selectPlot  } from '../actions/index';
-// import { getTragedySet } from '../services/TragedySetService';
-// import { TragedySetType, TragedySet } from '../models/TragedySet';
 import Scenario from '../models/Scenario';
+import {Plot, SelectedPlot} from '../models/Plot';
+
 interface IState{}
 
 interface IProps{}
 
 interface IStateToProps{
-  mainPlotList:any;
+  mainPlotList:Plot[];
   subPlotLists:any;
-  selectedPlotList:any;
+  selectedPlotList:SelectedPlot[];
 }
 
 interface IDispatchToProps{
-  // onChange: any
+  onChange: any
 }
 
 const mapStateToProps = (store):IStateToProps => {
@@ -44,7 +44,9 @@ const mapStateToProps = (store):IStateToProps => {
   const selectedSubPlotList = selectedPlotList.filter(plot=> plot.type==='S');
 
   // 選択中のルールとルールXのリストを紐付けたオブジェクトのリストを作成
-  for(let i=0;i<selectedSet.subplotNum;i++){
+  for(let i=0, len = selectedSubPlotList.length + 1;i<len;i++){
+    if(i===selectedSet.subplotNum){ break; }
+
     const selectedPlot = selectedSubPlotList[i] && selectedSubPlotList[i] || null;
     const sub = {
       // 選択されていないルール+選択中のルール
