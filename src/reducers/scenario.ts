@@ -37,13 +37,13 @@ function selectPlot({selectedSet, selectedPlotList}, {newPlot, oldPlotId}):Scena
 function createRoleList(selectedSet, selectedPlotList){
   let selectedRoleList =[];
   selectedPlotList.forEach(plot=>{
-    let roleList = plot.roles.forEach(role_name=>{
-      let role = selectedSet.roleList.find(role=>role.name === role_name);
+    plot.roles.forEach(role_name=>{
+      const role = selectedSet.roleList.find(role=>role.name === role_name);
       // 役職の上限を超えていなければ役職リストに追加
       if( ! role.limit || role.limit > selectedRoleList
                                           .filter( role => role.name === role_name )
                                           .length){
-        let copy = Object.assign({}, role);
+        const copy = Object.assign({}, role);
         selectedRoleList.push(copy);
       }
     });
