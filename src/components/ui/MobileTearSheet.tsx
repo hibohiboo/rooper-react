@@ -32,6 +32,11 @@ class MobileTearSheet extends React.Component<IProps, IState> {
     };
 
     return (
+      // <div style={prepareStyles(styles.root)}>
+      //   <div style={prepareStyles(styles.container)}>
+      //     {this.props.children}
+      //   </div>
+      // </div>
       <div style={styles.root}>
         <div style={styles.container}>
           {this.props.children}
