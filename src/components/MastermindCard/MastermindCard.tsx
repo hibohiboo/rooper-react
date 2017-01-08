@@ -2,6 +2,7 @@ import * as React from 'react';
 import Scenario from '../../models/Scenario';
 import TragedySet from './TragedySet';
 import SelectedPlotList from './SelectedPlotList';
+import {Card, CardHeader} from 'material-ui/Card';
 
 interface IProps {
   tragedySetName:string;
@@ -17,14 +18,16 @@ class MastermindCard extends React.Component<IProps, IState> {
   }
   render(): JSX.Element{
     return (
-      <div>
-        <h2>非公開シート</h2>
-          <TragedySet name={this.props.tragedySetName} />
+      <Card>
+        <CardHeader
+          title={`非公開シート`}
+          subtitle={this.props.tragedySetName}
+        />
           <SelectedPlotList 
             mainPlot={this.props.selectedPlotList.find(plot=>plot.type==='M')} 
             subPlotList={this.props.selectedPlotList.filter(plot=>plot.type==='S').sort((a,b)=>{ a.num > b.num ? 1 : -1})}
             subPlotNum={this.props.subPlotNum}/>
-      </div>
+      </Card>
     );
   }
  }
