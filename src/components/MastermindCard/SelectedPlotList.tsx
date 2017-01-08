@@ -48,22 +48,21 @@ interface IRule{
   name: string;
 }
 
-interface IProps extends Props<SelectedRules>{
-  ruleList?: any;
-  subPlotNum?: number;
+interface IProps extends Props<SelectedPlotList>{
+  mainPlot?:any;
+  subPlotList?: any;
+  subPlotNum: number;
 };
 
 
-class SelectedRules extends React.Component<IProps, IState> {
+class SelectedPlotList extends React.Component<IProps, IState> {
   render(): JSX.Element{
     return (
       <table>
         <tbody>
+          <RuleY name={this.props.mainPlot && this.props.mainPlot.name} />
           {
-            this.props.ruleList.map((rule, i) =>{
-              if(rule.type === "M"){
-                return <RuleY key={i} name={rule.name} />;
-              }
+            this.props.subPlotList.map((rule, i) =>{
               return <RuleX key={i} name={rule.name} num={i+1} maxNum={this.props.subPlotNum} />;
             }
           )}
@@ -73,4 +72,4 @@ class SelectedRules extends React.Component<IProps, IState> {
   }
  }
 
- export default SelectedRules;
+ export default SelectedPlotList;

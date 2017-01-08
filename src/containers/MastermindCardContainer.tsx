@@ -7,16 +7,19 @@ interface IState{
 }
 
 const mapStateToProps = (store:IState, ownProps) => {
-  let tragedySetName:string = '';
-  let selectedPlotList = [{name:"Y", type:"M"}, {name:"X1", type:"S"}, {name:"X2", type:"M"}];
-  let subPlotNum = 2;
-  if(store.scenario){
-    let scenario = store.scenario;
-    let selectedSet = scenario.selectedSet; 
-    tragedySetName = selectedSet.name;
-    selectedPlotList = scenario.selectedPlotList;
-    subPlotNum = selectedSet.subplotNum;
+  if(!store.scenario){
+    return { 
+      tragedySetName:'',
+      selectedPlotList:[],
+      subPlotNum:2
+    }
   }
+  const scenario = store.scenario;
+  const selectedSet = scenario.selectedSet; 
+  const tragedySetName = selectedSet.name;
+  const selectedPlotList = scenario.selectedPlotList;
+  const subPlotNum = selectedSet.subplotNum;
+
   return { 
     tragedySetName,
     selectedPlotList,

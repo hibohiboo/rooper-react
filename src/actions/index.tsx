@@ -1,10 +1,11 @@
 import { Action } from 'redux';
 import { TragedySet } from '../models/TragedySet';
+import { Plot } from '../models/Plot';
 
 /**
  * シナリオで使用されるアクション一覧
  */
-export type ScenarioActions = ICreateAction | ISelectTragedySetAction;
+export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction;
 
 export interface ICreateAction extends Action {
   type: 'CREATE_SCENARIO';
@@ -13,6 +14,12 @@ export interface ICreateAction extends Action {
 export interface ISelectTragedySetAction extends Action {
   type: 'SELECT_TRAGEDY_SET';
   set: TragedySet
+}
+
+export interface ISelectPlotAction extends Action {
+  type: 'SELECT_PLOT';
+  newPlot: Plot;
+  oldPlot: Plot;
 }
 
 export interface FETCH_GET_REQUEST extends Action{
@@ -41,5 +48,13 @@ export function selectTragedySet( set:TragedySet ):ISelectTragedySetAction{
   return {
     type: 'SELECT_TRAGEDY_SET',
     set
+  }
+}
+
+export function selectPlot( newPlot:Plot, oldPlot:Plot = null ):ISelectPlotAction{
+  return {
+    type: 'SELECT_PLOT',
+    newPlot,
+    oldPlot
   }
 }

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import PlotForm from '../components/InputForm/PlotForm';
-// import { selectTragedySet  } from '../actions/index';
+import { selectPlot  } from '../actions/index';
 // import { getTragedySet } from '../services/TragedySetService';
 // import { TragedySetType, TragedySet } from '../models/TragedySet';
-
+import Scenario from '../models/Scenario';
 interface IState{}
 
 interface IProps{}
@@ -20,26 +20,39 @@ interface IDispatchToProps{
 }
 
 const mapStateToProps = (store):IStateToProps => {
-  const scenario = store.scenario;
-  let mainPlotList = [];
-  let subPlotLists = [];
-  let selectedPlotList = [];
-  if(scenario && scenario.selectedSet){
-    const selectedSet = scenario.selectedSet;
-    const plotList = selectedSet.plotList;
-    mainPlotList = plotList.filter(plot=>plot.type==='M');
-    const subPlotList = plotList.filter(plot=>plot.type==='S');
-    for(let i=0;i<selectedSet.subplotNum;i++){
-      subPlotLists.push(subPlotList);
+  const scenario:Scenario = store.scenario;
+  if(!scenario || !scenario.selectedSet){
+      return { 
+        mainPlotList:[],
+        subPlotLists:[],
+        selectedPlotList:[]
     }
-    if(plotList[0]){ 
-      selectedPlotList.push(plotList[0]);
-      selectedPlotList.push(plotList[7]); 
-      selectedPlotList.push(plotList[8]); 
-    }
-
   }
-  console.log(selectedPlotList);
+
+  const selectedSet = scenario.selectedSet;
+  const plotList = selectedSet.plotList;
+  const mainPlotList = plotList.filter(plot=>plot.type==='M');;
+  const selectedPlotList = scenario.selectedPlotList;
+
+  let subPlotLists = [];
+
+
+  // 選択されていないルールXのリストを作成
+  const subPlotList = plotList.filter(plot=>plot.type==='S' && selectedPlotList.findIndex(sp=>sp.id === plot.id) === -1);
+
+  // 選択中のルールXのリストを作成
+  const selectedSubPlotList = selectedPlotList.filter(plot=> plot.type==='S');
+
+  // 選択中のルールとルールXのリストを紐付けたオブジェクトのリストを作成
+  for(let i=0;i<selectedSet.subplotNum;i++){
+    const selectedPlot = selectedSubPlotList[i] && selectedSubPlotList[i] || null;
+    const sub = {
+      // 選択されていないルール+選択中のルール
+      subPlotList: selectedPlot ? [...subPlotList, selectedPlot] : subPlotList, 
+      selectedPlot};
+    subPlotLists.push(sub);
+  }
+
   return { 
     mainPlotList,
     subPlotLists,
@@ -49,13 +62,9 @@ const mapStateToProps = (store):IStateToProps => {
 
 const mapDispatchToProps = (dispatch):IDispatchToProps => {
   return {
-    // onChange: (id:TragedySetType = TragedySetType.basic) => {
-    //   (async ()=>{
-    //     const res = await getTragedySet(id);
-    //     const data:any = res.data;
-    //     dispatch(selectTragedySet(data));
-    //   })();
-    // }
+    onChange: (newPlot, oldPlot) => {
+      dispatch(selectPlot(newPlot, oldPlot));
+    }
   }
 }
 
