@@ -16,10 +16,6 @@ store.dispatch(addScenario());
   const res = await getTragedySet(TragedySetType.basic);
   const data:any = res.data;
   store.dispatch(selectTragedySet(data));
-  store.dispatch(selectPlot({"num":0, "type":"M", "id":1,  "name":"殺人計画",             "roles":["キラー", "クロマク","キーパーソン"], "rules":[]}));
-  store.dispatch(selectPlot({"num":1,"type":"S", "id":7,  "name":"恋愛風景",             "roles":[ "メインラバーズ", "ラバーズ"],        "rules":[]}));
-  store.dispatch(selectPlot({"num":2,"type":"S", "id":9,  "name":"不穏な噂","roles":["ミスリーダー"],                      "rules":[{"type":"任意能力", "timing":"脚本家能力フェイズ", "rule":"脚本家能力フェイズ】任意のボード１つに[暗躍カウンター]を１つ置く。", "limitation":"１ループに１回制限"}]}));
-  store.dispatch(selectPlot({"num":2,"type":"S", "id":6,  "name":"友情サークル",         "roles":["フレンド", "フレンド", "ミスリーダー"], "rules":[]},7));
 })();
 
 

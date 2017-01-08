@@ -20,8 +20,9 @@ class Rule extends React.Component<IRuleProps, IState> {
   handleChange = (event, index, value) => {
     const selectedId = parseInt(value, 10);
     const selectedPlot = this.props.plotList.find(plot=>plot.id === selectedId);
+    const oldPlotId = this.props.selectedPlot && this.props.selectedPlot.id;
     selectedPlot.num = this.props.num;
-    this.props.onChange(selectedPlot, this.props.selectedPlot.id);
+    this.props.onChange(selectedPlot, oldPlotId);
   }
   render(): JSX.Element{
     return (
@@ -29,6 +30,7 @@ class Rule extends React.Component<IRuleProps, IState> {
         floatingLabelText={this.props.label}
         value={this.props.selectedPlot && this.props.selectedPlot.id}
         onChange={this.handleChange}
+        floatingLabelFixed={true}
       >
         {this.props.plotList.map((plot) =>
           <MenuItem key={plot.id} value={plot.id} label={plot.name}>
@@ -52,26 +54,28 @@ class PlotForm extends React.Component<IProps, IState> {
   render(): JSX.Element{
     return (
       <div>
-        <Rule
-          label={`ルールY`}
-          plotList={this.props.mainPlotList} 
-          selectedPlot={this.props.selectedPlotList.find(plot=> plot.type==='M')}
-          onChange={this.props.onChange}
-          num={0}
-           />
-        <br />
-        {this.props.subPlotLists.map((sub, i)=>
+        <div>
           <Rule
-            label={`ルールX`}
-            plotList={sub.subPlotList}
-            key={i}
-            num={i+1}
-            selectedPlot={sub.selectedPlot}
+            label={`ルールY`}
+            plotList={this.props.mainPlotList} 
+            selectedPlot={this.props.selectedPlotList.find(plot=> plot.type==='M')}
             onChange={this.props.onChange}
+            num={0}
             />
+        </div>
+        {this.props.subPlotLists.map((sub, i)=>
+          <div key={`div${i}`}>
+            <Rule
+              label={`ルールX${i+1}`}
+              plotList={sub.subPlotList}
+              key={i}
+              num={i+1}
+              selectedPlot={sub.selectedPlot}
+              onChange={this.props.onChange}
+              />
+            </div>
         )}
-
-      </div>
+        </div>
     );
   }
  }
