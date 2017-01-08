@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Props, Component} from 'react';
 import {tragedySetList, TragedySetType} from '../../models/TragedySet';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 interface IProps extends Props<TragedySetForm>{
   id: TragedySetType;
@@ -12,24 +14,26 @@ class TragedySetForm extends React.Component<IProps, IState> {
   constructor(public props: IProps) {
     super(props);
   }
-  public selectedNode:HTMLSelectElement;
+  /**
+   * 選択された値をintに変換してreducerに渡す
+   */
+  handleChange = (event, index, value) => {
+    const selectedId = parseInt(value, 10);
+    this.props.onChange(selectedId);
+  }
   render(): JSX.Element{
     return (
-      <select
-          ref={(node)=>{
-            this.selectedNode = node;
-          }}
-          value={this.props.id}
-          onChange={(e) => {
-           e.preventDefault();
-           let selectedId = parseInt(this.selectedNode.value, 10);
-           this.props.onChange(selectedId);
-    console.log(this.props);
-         }}>
+      <SelectField
+        floatingLabelText="惨劇セット"
+        value={this.props.id}
+        onChange={this.handleChange}
+      >
         {tragedySetList.map((set) =>
-          <option key={set.id} value={set.id}>{set.name}</option>
+          <MenuItem key={set.id} value={set.id} label={set.name}>
+            {set.name}
+          </MenuItem>
         )}
-      </select>
+      </SelectField>
     );
   }
  }

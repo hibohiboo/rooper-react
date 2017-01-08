@@ -22,7 +22,7 @@ const mapStateToProps = (store):IStateToProps => {
   if(store.scenario && store.scenario.selectedSet){
     id = store.scenario.selectedSet.id; 
   }
-  console.log(store.scenario.selectedSet);
+
   return { 
     id
   }
@@ -40,9 +40,9 @@ const mapDispatchToProps = (dispatch):IDispatchToProps => {
   }
 }
 
-const SelectTragedySet = connect(
+const TragedySetFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TragedySetForm);
 
-export default SelectTragedySet;
+export default TragedySetFormContainer;

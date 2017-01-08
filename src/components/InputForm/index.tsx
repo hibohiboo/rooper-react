@@ -1,17 +1,21 @@
 import * as React from 'react';
 import { Props, Component} from 'react';
-import SelectTragedySet from '../../containers/SelectTragedySet';
+import TragedySetFormContainer from '../../containers/TragedySetFormContainer';
+import PlotFormContainer from '../../containers/PlotFormContainer';
 
 interface IProps extends Props<InputForm>{
-};
-interface IState {};
+}
+interface IState {}
 
 class InputForm extends React.Component<IProps, IState> {
   render(): JSX.Element{
     return (
-  <SelectTragedySet />
-    );
+      <div>
+        <TragedySetFormContainer />
+        <PlotFormContainer />
+      </div>
+    )
   }
  }
 
- export default InputForm;
+ export default InputForm
