@@ -1,10 +1,12 @@
 import { ScenarioActions } from '../actions';
 import Scenario from '../models/Scenario';
+import { TragedySet } from '../models/TragedySet';
+const characterList = require('../data/characterList');
 
 const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
   switch (action.type) {
     case 'CREATE_SCENARIO':
-      return new Scenario();
+      return new Scenario(new TragedySet(),[], [], initCharacterList());
     case 'SELECT_TRAGEDY_SET':
       return new Scenario(action.set);
     case 'SELECT_PLOT':
@@ -49,6 +51,11 @@ function createRoleList(selectedSet, selectedPlotList){
     });
   });
   return selectedRoleList;
+}
+
+function initCharacterList(){
+  console.log(characterList);
+  return characterList;
 }
 
 export default scenario;

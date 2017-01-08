@@ -6,5 +6,6 @@
         "sourceMap": false,
         "allowJs":true,
         "jsx": "react"
-    }
+    },
+    "files":["src/lib.d.ts"]
 }
