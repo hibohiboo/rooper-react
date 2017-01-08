@@ -3,5 +3,6 @@
     "react",
     "es2015",
     "es2017"
-  ]
+  ],
+  "plugins": [ "transform-class-properties" ]
 }

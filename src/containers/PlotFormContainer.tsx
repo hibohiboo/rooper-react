@@ -36,7 +36,6 @@ const mapStateToProps = (store):IStateToProps => {
 
   let subPlotLists = [];
 
-
   // 選択されていないルールXのリストを作成
   const subPlotList = plotList.filter(plot=>plot.type==='S' && selectedPlotList.findIndex(sp=>sp.id === plot.id) === -1);
 

@@ -22,20 +22,6 @@ export interface ISelectPlotAction extends Action {
   oldPlotId: number;
 }
 
-export interface FETCH_GET_REQUEST extends Action{
-  type: 'FETCH_GET_REQUEST'
-}
-
-export interface FETCH_GET_FAILURE extends Action{
-  type: 'FETCH_GET_FAILURE',
-  error:string
-}
-
-export interface FETCH_GET_SUCCESS extends Action{
-  type: 'FETCH_GET_FAILURE',
-  response: any;
-}
-
 let nextScenarioId:number = 0;
 
 export function addScenario():ICreateAction{
@@ -57,4 +43,18 @@ export function selectPlot( newPlot:SelectedPlot, oldPlotId:number = null ):ISel
     newPlot,
     oldPlotId
   }
+}
+
+export interface FETCH_GET_REQUEST extends Action{
+  type: 'FETCH_GET_REQUEST'
+}
+
+export interface FETCH_GET_FAILURE extends Action{
+  type: 'FETCH_GET_FAILURE',
+  error:string
+}
+
+export interface FETCH_GET_SUCCESS extends Action{
+  type: 'FETCH_GET_SUCCESS',
+  response: any;
 }

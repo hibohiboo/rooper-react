@@ -57,3 +57,6 @@ RUN npm i --save-dev @types/axios
 RUN npm i --save material-ui
 RUN npm i --save-dev @types/material-ui
 RUN npm i --save react-tap-event-plugin
+
+# material-ui exampleに必要
+RUN npm i --save-dev babel-plugin-transform-class-properties

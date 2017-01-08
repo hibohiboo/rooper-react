@@ -55,6 +55,9 @@ function createRoleList(selectedSet, selectedPlotList){
   return selectedRoleList;
 }
 
+/**
+ * キャラクターの初期設定を行う
+ */
 function initCharacterList(){
   const characterList = characterListData.map(char=>new Character(char.id, char.name, char.paranoiaLimit));
 
