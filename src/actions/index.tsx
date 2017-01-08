@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { TragedySet } from '../models/TragedySet';
-import { Plot } from '../models/Plot';
+import { SelectedPlot } from '../models/Plot';
 
 /**
  * シナリオで使用されるアクション一覧
@@ -18,7 +18,7 @@ export interface ISelectTragedySetAction extends Action {
 
 export interface ISelectPlotAction extends Action {
   type: 'SELECT_PLOT';
-  newPlot: Plot;
+  newPlot: SelectedPlot;
   oldPlotId: number;
 }
 
@@ -51,7 +51,7 @@ export function selectTragedySet( set:TragedySet ):ISelectTragedySetAction{
   }
 }
 
-export function selectPlot( newPlot:Plot, oldPlotId:number = null ):ISelectPlotAction{
+export function selectPlot( newPlot:SelectedPlot, oldPlotId:number = null ):ISelectPlotAction{
   return {
     type: 'SELECT_PLOT',
     newPlot,

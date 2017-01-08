@@ -22,7 +22,7 @@ class MastermindCard extends React.Component<IProps, IState> {
           <TragedySet name={this.props.tragedySetName} />
           <SelectedPlotList 
             mainPlot={this.props.selectedPlotList.find(plot=>plot.type==='M')} 
-            subPlotList={this.props.selectedPlotList.filter(plot=>plot.type==='S')}
+            subPlotList={this.props.selectedPlotList.filter(plot=>plot.type==='S').sort((a,b)=>{ a.num > b.num ? 1 : -1})}
             subPlotNum={this.props.subPlotNum}/>
       </div>
     );

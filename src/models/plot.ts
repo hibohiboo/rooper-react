@@ -6,3 +6,7 @@ export class Plot {
   roles:Array<string>;
   rules:any;
 }
+
+export class SelectedPlot extends Plot {
+  num: number;
+}
