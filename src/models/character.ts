@@ -1,7 +1,7 @@
 export class Character {
   constructor(public id:number, 
                public name:string, 
-               public paranoia_limit:number, 
+               public paranoiaLimit:number, 
                public selected:boolean=false,
                public role:any=null){
   }
@@ -38,12 +38,12 @@ export class Character {
 export class IllegularCharacter extends Character{
   constructor(public id, 
               public name, 
-              public paranoia_limit:number, 
+              public paranoiaLimit:number, 
               public selected=false,
               public role=null, 
               public roleList:any=[],
               public isIllegular = true){
-    super(id, name, paranoia_limit, selected, role);
+    super(id, name, paranoiaLimit, selected, role);
   }
 
   /**

@@ -1,14 +1,16 @@
 import { ScenarioActions } from '../actions';
 import Scenario from '../models/Scenario';
 import { TragedySet } from '../models/TragedySet';
-const characterList = require('../data/characterList');
+import {Character} from '../models/Character';
+const characterListData = require('../data/characterList');
 
 const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
   switch (action.type) {
     case 'CREATE_SCENARIO':
-      return new Scenario(new TragedySet(),[], [], initCharacterList());
+      const {characterList, selectedCharacterList} = initCharacterList();
+      return new Scenario(characterList, new TragedySet(),[], [], selectedCharacterList);
     case 'SELECT_TRAGEDY_SET':
-      return new Scenario(action.set,[],[],state.selectedCharacterList);
+      return new Scenario(state.characterList, action.set,[],[],state.selectedCharacterList);
     case 'SELECT_PLOT':
       return selectPlot(state, action);
     default:
@@ -19,18 +21,18 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
 /**
  * ルールの追加・変更を行う
  */
-function selectPlot({selectedSet, selectedPlotList}, {newPlot, oldPlotId}):Scenario{
+function selectPlot({characterList, selectedSet, selectedPlotList}, {newPlot, oldPlotId}):Scenario{
   // 新規追加の場合、新しくルールリストに追加
   if(!oldPlotId){
     const newList = [...selectedPlotList, newPlot];
-    return new Scenario(selectedSet, newList, createRoleList(selectedSet, newList));
+    return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList));
   }
 
   // 変更の場合、古いルールの位置に新しいものを挿入
   const targetIndex = selectedPlotList.findIndex(plot=>plot.id === oldPlotId);
   selectedPlotList[targetIndex] = newPlot;
   const newList = [...selectedPlotList];
-  return new Scenario(selectedSet, newList, createRoleList(selectedSet, newList));
+  return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList));
 }
 
 /**
@@ -54,11 +56,14 @@ function createRoleList(selectedSet, selectedPlotList){
 }
 
 function initCharacterList(){
+  const characterList = characterListData.map(char=>new Character(char.id, char.name, char.paranoiaLimit));
+
   let selectedCharacterList = [];
   for(let i=0;i<9;i++){
+    characterList[i].selected = true;
     selectedCharacterList.push(characterList[i]);
   }
-  return selectedCharacterList;
+  return {characterList, selectedCharacterList};
 }
 
 export default scenario;
