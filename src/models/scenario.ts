@@ -5,8 +5,8 @@ import { SelectedPlot } from './Plot';
 export class Scenario {
   constructor( public selectedSet: TragedySet = new TragedySet(),
                public selectedPlotList:SelectedPlot[] = [],
-               public selectedCharacters: Character[] = [],
                public selectedRoleList:any = [],
+               public selectedCharacters: Character[] = [],
                public selectedIncidentLists:any = [],
                public dayList=[],
                public numberOfLoops:number = 4,
