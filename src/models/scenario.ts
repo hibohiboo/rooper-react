@@ -6,7 +6,7 @@ export class Scenario {
   constructor( public selectedSet: TragedySet = new TragedySet(),
                public selectedPlotList:SelectedPlot[] = [],
                public selectedRoleList:any = [],
-               public selectedCharacters: Character[] = [],
+               public selectedCharacterList: Character[] = [],
                public selectedIncidentLists:any = [],
                public dayList=[],
                public numberOfLoops:number = 4,

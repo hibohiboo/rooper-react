@@ -11,19 +11,20 @@ const mapStateToProps = (store:IState, ownProps) => {
     return { 
       tragedySetName:'',
       selectedPlotList:[],
-      subPlotNum:2
+      subPlotNum:2,
+      selectedCharacterList:[]
     }
   }
   const scenario = store.scenario;
-  const selectedSet = scenario.selectedSet; 
+  const {selectedSet, selectedPlotList, selectedCharacterList } = scenario;
   const tragedySetName = selectedSet.name;
-  const selectedPlotList = scenario.selectedPlotList;
   const subPlotNum = selectedSet.subplotNum;
 
   return { 
     tragedySetName,
     selectedPlotList,
-    subPlotNum
+    subPlotNum,
+    selectedCharacterList
   }
 }
 

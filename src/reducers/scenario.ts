@@ -8,7 +8,7 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
     case 'CREATE_SCENARIO':
       return new Scenario(new TragedySet(),[], [], initCharacterList());
     case 'SELECT_TRAGEDY_SET':
-      return new Scenario(action.set);
+      return new Scenario(action.set,[],[],state.selectedCharacterList);
     case 'SELECT_PLOT':
       return selectPlot(state, action);
     default:
@@ -54,8 +54,11 @@ function createRoleList(selectedSet, selectedPlotList){
 }
 
 function initCharacterList(){
-  console.log(characterList);
-  return characterList;
+  let selectedCharacterList = [];
+  for(let i=0;i<9;i++){
+    selectedCharacterList.push(characterList[i]);
+  }
+  return selectedCharacterList;
 }
 
 export default scenario;
