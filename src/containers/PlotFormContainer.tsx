@@ -52,7 +52,6 @@ const mapStateToProps = (store):IStateToProps => {
       selectedPlot};
     subPlotLists.push(sub);
   }
-
   return { 
     mainPlotList,
     subPlotLists,

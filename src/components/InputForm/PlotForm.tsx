@@ -30,7 +30,7 @@ class Rule extends React.Component<IRuleProps, IState> {
         floatingLabelText={this.props.label}
         value={this.props.selectedPlot && this.props.selectedPlot.id}
         onChange={this.handleChange}
-        floatingLabelFixed={true}
+        autoWidth={true}
       >
         {this.props.plotList.map((plot) =>
           <MenuItem key={plot.id} value={plot.id} label={plot.name}>
@@ -64,7 +64,7 @@ class PlotForm extends React.Component<IProps, IState> {
             />
         </div>
         {this.props.subPlotLists.map((sub, i)=>
-          <div key={`div${i}`}>
+          // <div key={`div${i}`}>
             <Rule
               label={`ルールX${i+1}`}
               plotList={sub.subPlotList}
@@ -73,7 +73,7 @@ class PlotForm extends React.Component<IProps, IState> {
               selectedPlot={sub.selectedPlot}
               onChange={this.props.onChange}
               />
-            </div>
+            // </div>
         )}
         </div>
     );

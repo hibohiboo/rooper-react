@@ -3,7 +3,9 @@
   "name": "First Steps",
   "subplotNum":1,
   "plotList": [
-    {"type":"M","name":"殺人計画",           "roles":["キラー", "クロマク","キーパーソン"], "rules":[]},
-    {"type":"S","name":"潜む殺人鬼",         "roles":["フレンド", "シリアルキラー"],         "rules":[]}
+    {"type":"M", "id": 1, "name":"殺人計画",           "roles":["キラー", "クロマク","キーパーソン"], "rules":[]},
+    {"type":"S", "id":9,  "name":"不穏な噂",             "roles":["ミスリーダー"],                      "rules":[{"type":"任意能力", "timing":"脚本家能力フェイズ", "rule":"脚本家能力フェイズ】任意のボード１つに[暗躍カウンター]を１つ置く。", "limitation":"１ループに１回制限"}]},
+    {"type":"S",  "id": 3, "name":"潜む殺人鬼",         "roles":["フレンド", "シリアルキラー"],         "rules":[]}
+
   ]
 }
