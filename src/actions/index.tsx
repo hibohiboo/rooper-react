@@ -3,9 +3,9 @@ import { TragedySet } from '../models/TragedySet';
 import { SelectedPlot } from '../models/Plot';
 
 /**
- * シナリオで使用されるアクション一覧
+ * シナリオ作成で使用されるアクション一覧
  */
-export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction;
+export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction;
 
 export interface ICreateAction extends Action {
   type: 'CREATE_SCENARIO';
@@ -22,9 +22,15 @@ export interface ISelectPlotAction extends Action {
   oldPlotId: number;
 }
 
+export interface IToggleCharacterAction extends Action {
+  type: 'TOGGLE_CHARACTER';
+  id: number;
+}
+
+
 let nextScenarioId:number = 0;
 
-export function addScenario():ICreateAction{
+export function createScenario():ICreateAction{
   return {
     type: 'CREATE_SCENARIO'
   }
@@ -42,6 +48,13 @@ export function selectPlot( newPlot:SelectedPlot, oldPlotId:number = null ):ISel
     type: 'SELECT_PLOT',
     newPlot,
     oldPlotId
+  }
+}
+
+export function toggleCharacter(id:number):IToggleCharacterAction{
+  return {
+    type: 'TOGGLE_CHARACTER',
+    id
   }
 }
 

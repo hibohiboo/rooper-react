@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import CharacterListForm from '../components/InputForm/CharacterListForm';
 import Scenario from '../models/Scenario';
-
+import { toggleCharacter  } from '../actions';
 interface IState{}
 
 interface IProps{}
@@ -12,7 +12,7 @@ interface IStateToProps{
 }
 
 interface IDispatchToProps{
-  // onChange: any
+  onToggle:any;
 }
 
 const mapStateToProps = (store):IStateToProps => {
@@ -22,18 +22,15 @@ const mapStateToProps = (store):IStateToProps => {
         characterList:[],
     }
   }
+
   return {characterList:scenario.characterList};
 }
 
 const mapDispatchToProps = (dispatch):IDispatchToProps => {
   return {
-    // onChange: (id:TragedySetType = TragedySetType.basic) => {
-    //   (async ()=>{
-    //     const res = await getTragedySet(id);
-    //     const data:any = res.data;
-    //     dispatch(selectTragedySet(data));
-    //   })();
-    // }
+    onToggle: (id:number) => {
+      dispatch(toggleCharacter(id));
+    }
   }
 }
 

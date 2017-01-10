@@ -10,7 +10,6 @@ interface IState {};
 export default class CharacterList extends React.Component<IProps, IState> {
   constructor(public props: IProps) {
     super(props);
-    console.log(props.selectedCharacterList);
   }
   render(): JSX.Element{
     return (

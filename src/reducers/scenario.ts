@@ -13,6 +13,8 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
       return new Scenario(state.characterList, action.set,[],[],state.selectedCharacterList);
     case 'SELECT_PLOT':
       return selectPlot(state, action);
+    case 'TOGGLE_CHARACTER':
+      return toggleCharacter(state, action);
     default:
       return state
   }
@@ -21,18 +23,18 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
 /**
  * ルールの追加・変更を行う
  */
-function selectPlot({characterList, selectedSet, selectedPlotList}, {newPlot, oldPlotId}):Scenario{
+function selectPlot({characterList, selectedSet, selectedPlotList, selectedCharacterList}, {newPlot, oldPlotId}):Scenario{
   // 新規追加の場合、新しくルールリストに追加
   if(!oldPlotId){
     const newList = [...selectedPlotList, newPlot];
-    return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList));
+    return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList), selectedCharacterList);
   }
 
   // 変更の場合、古いルールの位置に新しいものを挿入
   const targetIndex = selectedPlotList.findIndex(plot=>plot.id === oldPlotId);
   selectedPlotList[targetIndex] = newPlot;
   const newList = [...selectedPlotList];
-  return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList));
+  return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList), selectedCharacterList);
 }
 
 /**
@@ -68,5 +70,29 @@ function initCharacterList(){
   }
   return {characterList, selectedCharacterList};
 }
+
+  /**
+   * 選択したキャラクターを追加する。
+   * もう一度選択でリストから外す。
+   */
+function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRoleList, selectedCharacterList}, {id}){
+    // キャラクターを選択したらリストに追加。もう一度選択でリストから外す。
+    const selectedIndex = selectedCharacterList
+                    .findIndex((char:Character)=>char.id === id);
+    const index = characterList
+                    .findIndex((char:Character)=>char.id === id);
+
+    if( selectedIndex === -1){
+      selectedCharacterList.push(characterList[index]);
+      characterList[index].selected = true;
+      console.log(characterList[index]);
+      return new Scenario([...characterList], selectedSet,selectedPlotList,selectedRoleList, [...selectedCharacterList]);
+    }
+    selectedCharacterList.splice(selectedIndex,1);
+    characterList[index].selected = false;
+
+    // 変化を反映させるために、変更したリストは新しいリストを作成する。
+    return new Scenario([...characterList], selectedSet,selectedPlotList,selectedRoleList, [...selectedCharacterList]);
+  }
 
 export default scenario;
