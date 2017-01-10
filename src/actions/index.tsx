@@ -5,7 +5,7 @@ import { SelectedPlot } from '../models/Plot';
 /**
  * シナリオ作成で使用されるアクション一覧
  */
-export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction;
+export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction | ISelectRole;
 
 export interface ICreateAction extends Action {
   type: 'CREATE_SCENARIO';
@@ -27,6 +27,11 @@ export interface IToggleCharacterAction extends Action {
   id: number;
 }
 
+export interface ISelectRole extends Action{
+  type: 'SELECT_ROLE';
+  roleId: number;
+  characterId:number;  
+}
 
 let nextScenarioId:number = 0;
 
@@ -55,6 +60,14 @@ export function toggleCharacter(id:number):IToggleCharacterAction{
   return {
     type: 'TOGGLE_CHARACTER',
     id
+  }
+}
+
+export function selectRole(roleId:number, characterId:number): ISelectRole{
+  return {
+    type: 'SELECT_ROLE',
+    roleId,
+    characterId  
   }
 }
 

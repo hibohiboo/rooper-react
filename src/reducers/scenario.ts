@@ -2,6 +2,7 @@ import { ScenarioActions } from '../actions';
 import Scenario from '../models/Scenario';
 import { TragedySet } from '../models/TragedySet';
 import {Character} from '../models/Character';
+import {Role} from '../models/Role';
 const characterListData = require('../data/characterList');
 
 const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
@@ -10,11 +11,13 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
       const {characterList, selectedCharacterList} = initCharacterList();
       return new Scenario(characterList, new TragedySet(),[], [], selectedCharacterList);
     case 'SELECT_TRAGEDY_SET':
-      return new Scenario(state.characterList, action.set,[],[],state.selectedCharacterList);
+      return new Scenario(state.characterList, action.set,[],[]);
     case 'SELECT_PLOT':
       return selectPlot(state, action);
     case 'TOGGLE_CHARACTER':
       return toggleCharacter(state, action);
+    case 'SELECT_ROLE':
+      return selectRole(state, action);
     default:
       return state
   }
@@ -23,18 +26,18 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
 /**
  * ルールの追加・変更を行う
  */
-function selectPlot({characterList, selectedSet, selectedPlotList, selectedCharacterList}, {newPlot, oldPlotId}):Scenario{
+function selectPlot({characterList, selectedSet, selectedPlotList}, {newPlot, oldPlotId}):Scenario{
   // 新規追加の場合、新しくルールリストに追加
   if(!oldPlotId){
     const newList = [...selectedPlotList, newPlot];
-    return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList), selectedCharacterList);
+    return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList));
   }
 
   // 変更の場合、古いルールの位置に新しいものを挿入
   const targetIndex = selectedPlotList.findIndex(plot=>plot.id === oldPlotId);
   selectedPlotList[targetIndex] = newPlot;
   const newList = [...selectedPlotList];
-  return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList), selectedCharacterList);
+  return new Scenario(characterList, selectedSet, newList, createRoleList(selectedSet, newList));
 }
 
 /**
@@ -49,8 +52,8 @@ function createRoleList(selectedSet, selectedPlotList){
       if( ! role.limit || role.limit > selectedRoleList
                                           .filter( role => role.name === role_name )
                                           .length){
-        const copy = Object.assign({}, role);
-        selectedRoleList.push(copy);
+        // const copy = Object.assign({}, role);
+        selectedRoleList.push(new Role(role.id, role.name, role.limit));
       }
     });
   });
@@ -75,24 +78,36 @@ function initCharacterList(){
    * 選択したキャラクターを追加する。
    * もう一度選択でリストから外す。
    */
-function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRoleList, selectedCharacterList}, {id}){
-    // キャラクターを選択したらリストに追加。もう一度選択でリストから外す。
-    const selectedIndex = selectedCharacterList
-                    .findIndex((char:Character)=>char.id === id);
-    const index = characterList
-                    .findIndex((char:Character)=>char.id === id);
+function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRoleList}, {id}){
+  // キャラクターを選択したらリストに追加。もう一度選択でリストから外す。
+  const selectedIndex = characterList
+                  .findIndex((char:Character)=>char.id === id && char.selected);
+  const index = characterList
+                  .findIndex((char:Character)=>char.id === id);
 
-    if( selectedIndex === -1){
-      selectedCharacterList.push(characterList[index]);
-      characterList[index].selected = true;
-      console.log(characterList[index]);
-      return new Scenario([...characterList], selectedSet,selectedPlotList,selectedRoleList, [...selectedCharacterList]);
-    }
-    selectedCharacterList.splice(selectedIndex,1);
-    characterList[index].selected = false;
-
-    // 変化を反映させるために、変更したリストは新しいリストを作成する。
-    return new Scenario([...characterList], selectedSet,selectedPlotList,selectedRoleList, [...selectedCharacterList]);
+  if( selectedIndex === -1){
+    characterList[index].selected = true;
+    return new Scenario([...characterList], selectedSet,selectedPlotList,selectedRoleList);
   }
+  characterList[index].selected = false;
+
+  // 変化を反映させるために、変更したリストは新しいリストを作成する。
+  return new Scenario([...characterList], selectedSet,selectedPlotList,selectedRoleList);
+}
+
+
+function selectRole({characterList, selectedSet,selectedPlotList,selectedRoleList}, {roleId, characterId}){
+    const characterIndex = characterList
+                    .findIndex((char:Character)=>char.id === characterId);
+    const roleIndex = selectedRoleList.findIndex(role=>role.id === roleId);
+    const isPerson = roleId === 0;
+
+    selectedRoleList[roleIndex].selected = isPerson ? false : true;
+
+    const role:Role = selectedRoleList[roleIndex];
+    characterList[characterIndex].addRole(role);
+
+    return new Scenario([...characterList], selectedSet,selectedPlotList,[...selectedRoleList]);
+}
 
 export default scenario;

@@ -20,6 +20,7 @@ export default class CharacterList extends React.Component<IProps, IState> {
         >
           <TableRow>
             <TableHeaderColumn>人物</TableHeaderColumn>
+            <TableHeaderColumn>役職</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody
@@ -29,6 +30,7 @@ export default class CharacterList extends React.Component<IProps, IState> {
             this.props.selectedCharacterList.map(char =>{
               return <TableRow  key={char.id}>
                 <TableRowColumn> {char.name} </TableRowColumn>
+                <TableRowColumn> {char.role ? char.role.name : `パーソン`} </TableRowColumn>
               </TableRow>
             }
           )}

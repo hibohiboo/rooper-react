@@ -17,17 +17,17 @@
     {"type":"S", "id":12, "name":"妄想拡大ウイルス",     "roles":["ミスリーダー"],                      "rules":[{"type":"強制", "timing":"常時", "rule":"パーソンは[不安カウンター]が３つ以上置かれている限り、役職がシリアルキラーに変更される。"}]}
   ],
   "roleList":[
-    {"id":1,  "name":"キラー", "limit":""},
-    {"id":2,  "name":"クロマク", "limit":""},
-    {"id":3,  "name":"キーパーソン", "limit":""},
-    {"id":4,  "name":"カルティスト", "limit":""},
-    {"id":5,  "name":"タイムトラベラー", "limit":""},
-    {"id":6,  "name":"ウィッチ", "limit":""},
+    {"id":1,  "name":"キラー", "limit":0},
+    {"id":2,  "name":"クロマク", "limit":0},
+    {"id":3,  "name":"キーパーソン", "limit":0},
+    {"id":4,  "name":"カルティスト", "limit":0},
+    {"id":5,  "name":"タイムトラベラー", "limit":0},
+    {"id":6,  "name":"ウィッチ", "limit":0},
     {"id":7,  "name":"フレンド", "limit":2},
-    {"id":8,  "name":"メインラバーズ", "limit":""},
-    {"id":9,  "name":"ラバーズ", "limit":""},
-    {"id":10, "name":"シリアルキラー", "limit":""},
-    {"id":11, "name":"ファクター", "limit":""},
+    {"id":8,  "name":"メインラバーズ", "limit":0},
+    {"id":9,  "name":"ラバーズ", "limit":0},
+    {"id":10, "name":"シリアルキラー", "limit":0},
+    {"id":11, "name":"ファクター", "limit":0},
     {"id":12, "name":"ミスリーダー", "limit":1}
   ],
   "incidentList":[

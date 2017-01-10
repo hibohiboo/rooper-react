@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import { createStore } from 'redux';
 import reducers from './reducers';
-import { createScenario, selectTragedySet, selectPlot, toggleCharacter  } from './actions';
+import { createScenario, selectTragedySet, selectPlot, toggleCharacter, selectRole  } from './actions';
 import { getTragedySet } from './services/TragedySetService';
 import { TragedySetType } from './models/TragedySet';
 import * as axios from 'axios';

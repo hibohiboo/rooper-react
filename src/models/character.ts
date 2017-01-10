@@ -20,16 +20,11 @@ export class Character {
   /**
    * 役職を追加する。
    */
-  addRole(role, isPerson):void{
-    if(this.role) {
-      this.role.selected = false;
-    }
+  addRole(role):void{
 
     // パーソンを選択した場合は役職リセット
-    if(isPerson){
-      this.role = null;
-    }else{
-      role.selected = true;
+    this.role = null;    
+    if(role.selected){
       this.role = role;
     }
   }
