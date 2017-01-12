@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Props, Component} from 'react';
 import TragedySetFormContainer from '../../containers/TragedySetFormContainer';
 import PlotFormContainer from '../../containers/PlotFormContainer';
-import {Character} from '../../models/Character';
+import {ICharacterWithRole} from '../../models/Scenario';
 import RoleListForm from './RoleListForm';
 import {List, ListItem} from 'material-ui/List';
 import Toggle from 'material-ui/Toggle';
@@ -10,7 +10,7 @@ import MobileTearSheet from '../ui/MobileTearSheet';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 interface IProps extends Props<CharacterListForm>{
-  characterList:Character[];
+  characterWithRoleList:ICharacterWithRole[];
   unallocatedRoleList:any;
   onToggle:any;
   onChange:any;
@@ -39,14 +39,14 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
           <TableBody
             displayRowCheckbox={false}
           >
-            {this.props.characterList.map(char =>{
+            {this.props.characterWithRoleList.map(char =>{
                 return <TableRow  key={char.id}>
                           <TableRowColumn>
                             <Toggle defaultToggled={char.selected} value={char.id} onToggle={this.handleToggle} />
                           </TableRowColumn>
                           <TableRowColumn>{char.name}</TableRowColumn>
                           <TableRowColumn>
-                            {char.selected ? <RoleListForm selectedId={char.role && char.role.id || 0} 
+                            {char.selected ? <RoleListForm selectedKey={char.role && char.role.key || 0} 
                                                            characterId={char.id} 
                                                            onChange={this.props.onChange} 
                                                            roleList={char.role ? [...this.props.unallocatedRoleList, char.role] :

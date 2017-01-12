@@ -16,7 +16,7 @@ const mapStateToProps = (store:IState, ownProps) => {
     }
   }
   const scenario = store.scenario;
-  const {selectedSet, selectedPlotList, characterList } = scenario;
+  const {selectedSet, selectedPlotList, characterList, selectedRoleList, characterRoleList, selectedCharacterList } = scenario;
   const tragedySetName = selectedSet.name;
   const subPlotNum = selectedSet.subplotNum;
 
@@ -24,7 +24,7 @@ const mapStateToProps = (store:IState, ownProps) => {
     tragedySetName,
     selectedPlotList,
     subPlotNum,
-    selectedCharacterList: characterList.filter(char=>char.selected === true)
+    selectedCharacterList
   }
 }
 

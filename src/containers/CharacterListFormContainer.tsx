@@ -8,7 +8,7 @@ interface IState{}
 interface IProps{}
 
 interface IStateToProps{
-  characterList:any;
+  characterWithRoleList:any;
   unallocatedRoleList:any;
 }
 
@@ -17,18 +17,21 @@ interface IDispatchToProps{
   onChange:any;
 }
 
+/**
+ * まだ選択されていない役職一覧を作成。
+ */
 const mapStateToProps = (store):IStateToProps => {
   const scenario:Scenario = store.scenario;
-  const {characterList, selectedRoleList} = scenario;
-  if(!scenario || !scenario.characterList){
+  if(!scenario){
       return { 
-        characterList:[],
+        characterWithRoleList:[],
         unallocatedRoleList:[]
     }
   }
-  const unallocatedRoleList = selectedRoleList.filter(r => r.selected===false);
+  const {characterWithRoleList, unallocatedRoleList} = scenario;
+
   return {
-            characterList,
+            characterWithRoleList,
             unallocatedRoleList
           };
 }
@@ -38,8 +41,8 @@ const mapDispatchToProps = (dispatch):IDispatchToProps => {
     onToggle: (id:number) => {
       dispatch(toggleCharacter(id));
     },
-    onChange: (characterId, roleId)=>{
-        dispatch(selectRole(characterId, roleId));
+    onChange: (characterKey, roleId)=>{
+        dispatch(selectRole(characterKey, roleId));
     }
   }
 }

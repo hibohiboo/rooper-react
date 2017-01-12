@@ -18,8 +18,6 @@ store.dispatch(createScenario());
   store.dispatch(selectTragedySet(data));
 })();
 
-
-
 /**
  * reduxフレームワークを使用。  
  * ビューはreact

@@ -29,7 +29,7 @@ export interface IToggleCharacterAction extends Action {
 
 export interface ISelectRole extends Action{
   type: 'SELECT_ROLE';
-  roleId: number;
+  roleKey: number;
   characterId:number;  
 }
 
@@ -63,10 +63,10 @@ export function toggleCharacter(id:number):IToggleCharacterAction{
   }
 }
 
-export function selectRole(roleId:number, characterId:number): ISelectRole{
+export function selectRole(roleKey:number, characterId:number): ISelectRole{
   return {
     type: 'SELECT_ROLE',
-    roleId,
+    roleKey,
     characterId  
   }
 }

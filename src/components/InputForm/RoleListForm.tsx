@@ -10,33 +10,28 @@ interface IRuleProps extends Props<RoleListForm>{
   roleList:any;
   onChange:any;
   characterId:number;
-  selectedId:number;
-  // label:string;
-  // plotList:any
-  // selectedPlot:any;
-  // onChange:any;
-  // num:number;
+  selectedKey:number;
 };
 interface IState {};
 
 export default class RoleListForm extends React.Component<IRuleProps, IState> {
 
   handleChange = (event, index, value) => {
-    const selectedId = parseInt(value, 10);
-    this.props.onChange(selectedId, this.props.characterId);
+    const selectedKey = parseInt(value, 10);
+    this.props.onChange(selectedKey, this.props.characterId);
   }
   render(): JSX.Element{
     return (
       <SelectField
         // floatingLabelText={this.props.label}
-        value={this.props.selectedId}
+        value={this.props.selectedKey}
         onChange={this.handleChange}
       >
         <MenuItem value={0} label={`パーソン`}>
           パーソン
         </MenuItem>
         {this.props.roleList.map((role, index) =>
-          <MenuItem key={index} value={role.id} label={role.name}>
+          <MenuItem key={role.key} value={role.key} label={role.name}>
             {role.name}
           </MenuItem>
         )}
