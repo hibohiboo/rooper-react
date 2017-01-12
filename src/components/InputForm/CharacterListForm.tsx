@@ -23,6 +23,10 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
     this.props.onToggle(id);
   };
   render(): JSX.Element{
+    var useColumnStyle={ width:"50px",
+                         paddingLeft:"10px",
+                         paddingRight:"10px",
+                         textAlign:"center"};
     return (
       <MobileTearSheet>
         <Table selectable={false} height={`300px`}>
@@ -31,7 +35,7 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
             adjustForCheckbox={false}
           >
             <TableRow>
-              <TableHeaderColumn>使用</TableHeaderColumn>
+              <TableHeaderColumn style={useColumnStyle}>使用</TableHeaderColumn>
               <TableHeaderColumn>人物</TableHeaderColumn>
               <TableHeaderColumn>役職</TableHeaderColumn>
             </TableRow>
@@ -41,7 +45,7 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
           >
             {this.props.characterWithRoleList.map(char =>{
                 return <TableRow  key={char.id}>
-                          <TableRowColumn>
+                          <TableRowColumn  style={useColumnStyle}>
                             <Toggle defaultToggled={char.selected} value={char.id} onToggle={this.handleToggle} />
                           </TableRowColumn>
                           <TableRowColumn>{char.name}</TableRowColumn>

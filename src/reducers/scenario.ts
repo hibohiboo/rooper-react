@@ -77,7 +77,6 @@ function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRo
   }
   characterList[index] = getCharacter(selectedCharcterId);
 
-  // 変化を反映させるために、変更したリストは新しいリストを作成する。
   return new Scenario(characterList, selectedSet,selectedPlotList, selectedRoleList);
 }
 
