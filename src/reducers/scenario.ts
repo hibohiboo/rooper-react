@@ -64,20 +64,26 @@ function createRoleList(selectedSet, selectedPlotList){
    * 選択したキャラクターを追加する。
    * もう一度選択でリストから外す。
    */
-function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRoleList}, {id}){
+function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRoleList, characterRoleList}, {id}){
   // キャラクターを選択したらリストに追加。もう一度選択でリストから外す。
   const selectedIndex = characterList
                   .findIndex((char:Character)=>char.id === id && char.selected);
   const index = characterList
                   .findIndex((char:Character)=>char.id === id);
   const selectedCharcterId = characterList[index].id;
+
+  // キャラクターを追加
   if( selectedIndex === -1){
     characterList[index] = getCharacter(selectedCharcterId, true);
-    return new Scenario(characterList, selectedSet,selectedPlotList, selectedRoleList);
+    return new Scenario(characterList, selectedSet,selectedPlotList, selectedRoleList, characterRoleList);
   }
-  characterList[index] = getCharacter(selectedCharcterId);
 
-  return new Scenario(characterList, selectedSet,selectedPlotList, selectedRoleList);
+  // キャラクターを外す
+  characterList[index] = getCharacter(selectedCharcterId, false);
+  // 役職が設定されていた場合削除
+  const list = characterRoleList.filter(m=> m.characterId !== selectedCharcterId);
+
+  return new Scenario(characterList, selectedSet,selectedPlotList, selectedRoleList, list);
 }
 
 /**
@@ -85,7 +91,7 @@ function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRo
  */
 function selectRole({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList}, {roleKey, characterId}){
     if(roleKey === 0){
-      const list = characterRoleList.filter(m=>m.charcterId !== characterId);
+      const list = characterRoleList.filter(m=>m.characterId !== characterId);
       return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, list);
     }
     return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, [...characterRoleList, {characterId, roleKey}]);
