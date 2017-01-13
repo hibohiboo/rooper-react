@@ -1,5 +1,5 @@
 import { TragedySet } from './TragedySet';
-import { Character, IllegularCharacter }  from './character';
+import { Character, CharacterType }  from './character';
 import { SelectedPlot } from './Plot';
 import {Role} from './Role';
 
@@ -43,11 +43,16 @@ export class Scenario {
   }
 
   get characterWithRoleList():ICharacterWithRole[]{
-    const {characterList, selectedRoleList, characterRoleList } = this;
+    const {characterList, selectedRoleList, characterRoleList, selectedSet} = this;
     
     return characterList.map(char=>{
       const charRole = characterRoleList.find(charRole=>char.id === charRole.characterId);
-      const role = charRole && selectedRoleList.find(role => role.key === charRole.roleKey);
+      let role = charRole && selectedRoleList.find(role => role.key === charRole.roleKey);
+
+      // イレギュラーの場合、セットの役職から選択
+      if(char.id === CharacterType.illeguler){
+        role = charRole && selectedSet.roleList.find(role => role.key === charRole.roleKey);
+      }
       return {
         id: char.id,
         name: char.name,
@@ -57,7 +62,6 @@ export class Scenario {
     });
 
   }
-
 
   /**
    * 未割り当ての役職一覧を返す
@@ -70,6 +74,16 @@ export class Scenario {
             cr=>cr.roleKey === role.key) === -1);
 
       return unallocatedRoleList;
+  }
+
+  /**
+   * 選択されていない役職を選択する
+   */
+  get unselectedRoleList(){
+    const {selectedSet, selectedRoleList} = this;
+    const roleList = selectedSet.roleList;
+    const filter = role => selectedRoleList.findIndex(r=>r.id === role.id) === -1;
+    return roleList.filter(filter);
   }
 }
 

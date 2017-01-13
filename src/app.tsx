@@ -13,9 +13,8 @@ const store = createStore(reducers);
 store.dispatch(createScenario());
 
 (async ()=>{
-  const res = await getTragedySet(TragedySetType.basic);
-  const data:any = res.data;
-  store.dispatch(selectTragedySet(data));
+  const set = await getTragedySet(TragedySetType.basic);
+  store.dispatch(selectTragedySet(set));
 })();
 
 /**

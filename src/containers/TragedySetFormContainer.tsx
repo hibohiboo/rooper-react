@@ -32,9 +32,8 @@ const mapDispatchToProps = (dispatch):IDispatchToProps => {
   return {
     onChange: (id:TragedySetType = TragedySetType.basic) => {
       (async ()=>{
-        const res = await getTragedySet(id);
-        const data:any = res.data;
-        dispatch(selectTragedySet(data));
+        const set = await getTragedySet(id);
+        dispatch(selectTragedySet(set));
       })();
     }
   }

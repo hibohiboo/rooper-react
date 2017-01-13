@@ -1,4 +1,4 @@
-import { Character, IllegularCharacter } from '../models/character';
+import { Character } from '../models/character';
 // const characterList  = require( '../data/characterList');
 
 // export const CHARACTERS: Character[] = function(){

@@ -3,7 +3,9 @@ import { Props, Component} from 'react';
 import TragedySetFormContainer from '../../containers/TragedySetFormContainer';
 import PlotFormContainer from '../../containers/PlotFormContainer';
 import {ICharacterWithRole} from '../../models/Scenario';
+import {CharacterType} from '../../models/Character';
 import RoleListForm from './RoleListForm';
+import IllegulerRoleListFormContainer from '../../containers/IllegulerRoleListFormContainer';
 import {List, ListItem} from 'material-ui/List';
 import Toggle from 'material-ui/Toggle';
 import MobileTearSheet from '../ui/MobileTearSheet';
@@ -50,11 +52,13 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
                           </TableRowColumn>
                           <TableRowColumn>{char.name}</TableRowColumn>
                           <TableRowColumn>
-                            {char.selected ? <RoleListForm selectedKey={char.role && char.role.key || 0} 
-                                                           characterId={char.id} 
-                                                           onChange={this.props.onChange} 
-                                                           roleList={char.role ? [...this.props.unallocatedRoleList, char.role] :
-                                                                                 this.props.unallocatedRoleList} /> : ``}
+                            {char.selected && char.id !== CharacterType.illeguler ?
+                               <RoleListForm selectedKey={char.role && char.role.key || 0} 
+                                              characterId={char.id} 
+                                              onChange={this.props.onChange} 
+                                              roleList={char.role ? [...this.props.unallocatedRoleList, char.role] :
+                                                                    this.props.unallocatedRoleList} /> : ``}
+                            {char.selected && char.id === CharacterType.illeguler ? <IllegulerRoleListFormContainer /> : ``}
                           </TableRowColumn>  
                         </TableRow>
               }

@@ -90,8 +90,8 @@ function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRo
  * 選択した役職をキャラクターに割り振る
  */
 function selectRole({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList}, {roleKey, characterId}){
+    const list = characterRoleList.filter(m=>m.characterId !== characterId);
     if(roleKey === 0){
-      const list = characterRoleList.filter(m=>m.characterId !== characterId);
       return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, list);
     }
     return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, [...characterRoleList, {characterId, roleKey}]);
