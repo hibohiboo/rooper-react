@@ -94,7 +94,7 @@ function selectRole({characterList, selectedSet, selectedPlotList, selectedRoleL
     if(roleKey === 0){
       return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, list);
     }
-    return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, [...characterRoleList, {characterId, roleKey}]);
+    return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, [...list, {characterId, roleKey}]);
 }
 
 export default scenario;
