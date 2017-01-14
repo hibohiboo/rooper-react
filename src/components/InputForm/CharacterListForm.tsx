@@ -29,8 +29,11 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
                          paddingLeft:"10px",
                          paddingRight:"10px",
                          textAlign:"center"};
+    var characterColumnStyle = {
+      width:"120px"
+    }
     return (
-      <MobileTearSheet>
+      // <MobileTearSheet>
         <Table selectable={false} height={`300px`}>
           <TableHeader
             displaySelectAll={false}
@@ -38,8 +41,9 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
           >
             <TableRow>
               <TableHeaderColumn style={useColumnStyle}>使用</TableHeaderColumn>
-              <TableHeaderColumn>人物</TableHeaderColumn>
+              <TableHeaderColumn style={characterColumnStyle}>人物</TableHeaderColumn>
               <TableHeaderColumn>役職</TableHeaderColumn>
+              <TableHeaderColumn>備考</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -50,22 +54,22 @@ export default class CharacterListForm extends React.Component<IProps, IState> {
                           <TableRowColumn  style={useColumnStyle}>
                             <Toggle defaultToggled={char.selected} value={char.id} onToggle={this.handleToggle} />
                           </TableRowColumn>
-                          <TableRowColumn>{char.name}</TableRowColumn>
+                          <TableRowColumn style={characterColumnStyle}>{char.name}</TableRowColumn>
                           <TableRowColumn>
-                            {char.selected && char.id !== CharacterType.illeguler ?
+                            {char.selected && char.id !== CharacterType.mysteryBoy ?
                                <RoleListForm selectedKey={char.role && char.role.key || 0} 
                                               characterId={char.id} 
                                               onChange={this.props.onChange} 
                                               roleList={char.role ? [...this.props.unallocatedRoleList, char.role] :
                                                                     this.props.unallocatedRoleList} /> : ``}
-                            {char.selected && char.id === CharacterType.illeguler ? <IllegulerRoleListFormContainer /> : ``}
+                            {char.selected && char.id === CharacterType.mysteryBoy ? <IllegulerRoleListFormContainer /> : ``}
                           </TableRowColumn>  
                         </TableRow>
               }
             )}
           </TableBody>
         </Table>
-      </MobileTearSheet>
+      // </MobileTearSheet>
     )
   }
  }

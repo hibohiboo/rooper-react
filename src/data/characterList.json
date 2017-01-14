@@ -18,10 +18,11 @@
     {"id": 17, "name": "ナース",      "paranoiaLimit": 3},
     {"id": 18, "name": "手先",       "paranoiaLimit": 1},
     {"id": 19, "name": "幻想",       "paranoiaLimit": 2},
-    {"id": 20, "name": "鑑識官",      "paranoiaLimit": 3},
-    {"id": 21, "name": "A.I.",       "paranoiaLimit": 4},
-    {"id": 22, "name": "教師",       "paranoiaLimit": 2},
-    {"id": 23, "name": "転校生",      "paranoiaLimit": 2},
-    {"id": 24, "name": "軍人",       "paranoiaLimit": 2},
-    {"id": 25, "name": "黒猫",       "paranoiaLimit": 0}
+    {"id": 20, "name": "学者",       "paranoiaLimit":2},
+    {"id": 21, "name": "鑑識官",      "paranoiaLimit": 3},
+    {"id": 22, "name": "A.I.",       "paranoiaLimit": 4},
+    {"id": 23, "name": "教師",       "paranoiaLimit": 2},
+    {"id": 24, "name": "転校生",      "paranoiaLimit": 2},
+    {"id": 25, "name": "軍人",       "paranoiaLimit": 2},
+    {"id": 26, "name": "黒猫",       "paranoiaLimit": 0}
   ]

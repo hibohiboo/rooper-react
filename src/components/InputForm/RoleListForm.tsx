@@ -51,7 +51,7 @@ export class IllegulerRoleListForm extends React.Component<IIllegulerRoleProps, 
 
   handleChange = (event, index, value) => {
     const selectedKey = parseInt(value, 10);
-    this.props.onChange(selectedKey, CharacterType.illeguler);
+    this.props.onChange(selectedKey, CharacterType.mysteryBoy);
   }
   render(): JSX.Element{
     return (

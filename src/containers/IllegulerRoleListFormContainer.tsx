@@ -17,7 +17,7 @@ const mapStateToProps = (store:IState, ownProps) => {
   }
   const scenario = store.scenario;
   const {unselectedRoleList, characterRoleList} = scenario;
-  const characterRole = characterRoleList.find(item=>item.characterId === CharacterType.illeguler);
+  const characterRole = characterRoleList.find(item=>item.characterId === CharacterType.mysteryBoy);
   const selectedKey = characterRole && characterRole.roleKey || unselectedRoleList[0].key;
   return { 
     roleList:unselectedRoleList,

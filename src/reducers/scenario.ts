@@ -90,11 +90,17 @@ function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRo
  * 選択した役職をキャラクターに割り振る
  */
 function selectRole({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList}, {roleKey, characterId}){
-    const list = characterRoleList.filter(m=>m.characterId !== characterId);
+    // 既にキャラクターに役職が割り振られていたらキャラクター役職対応リストから取り除く
+    const filterdList = characterRoleList.filter(m=>m.characterId !== characterId);
+
+    // パーソンの役職の場合、キャラクター役職対応リストから取り除いたまま保存
     if(roleKey === 0){
-      return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, list);
+      return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, filterdList);
     }
-    return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, [...list, {characterId, roleKey}]);
+
+    // それ以外の場合、キャラクター役職対応リストに追加
+    const addedList = [...filterdList, {characterId, roleKey}];
+    return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, addedList);
 }
 
 export default scenario;

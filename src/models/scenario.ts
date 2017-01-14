@@ -50,7 +50,7 @@ export class Scenario {
       let role = charRole && selectedRoleList.find(role => role.key === charRole.roleKey);
 
       // イレギュラーの場合、セットの役職から選択
-      if(char.id === CharacterType.illeguler){
+      if(char.id === CharacterType.mysteryBoy){
         role = charRole && selectedSet.roleList.find(role => role.key === charRole.roleKey);
       }
       return {
