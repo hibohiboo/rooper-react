@@ -60,3 +60,6 @@ RUN npm i --save react-tap-event-plugin
 
 # material-ui exampleに必要
 RUN npm i --save-dev babel-plugin-transform-class-properties
+
+# material-ui input type=number用フィールド追加
+RUN npm i --save material-ui-number-input

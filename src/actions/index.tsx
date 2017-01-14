@@ -5,7 +5,7 @@ import { SelectedPlot } from '../models/Plot';
 /**
  * シナリオ作成で使用されるアクション一覧
  */
-export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction | ISelectRole;
+export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction | ISelectRole | IInputDaysPerLoop;
 
 export interface ICreateAction extends Action {
   type: 'CREATE_SCENARIO';
@@ -31,6 +31,11 @@ export interface ISelectRole extends Action{
   type: 'SELECT_ROLE';
   roleKey: number;
   characterId:number;  
+}
+
+export interface IInputDaysPerLoop extends Action{
+  type: 'INPUT_DAYS_PER_LOOP';
+  daysPerLoop: number;
 }
 
 let nextScenarioId:number = 0;
@@ -68,6 +73,13 @@ export function selectRole(roleKey:number, characterId:number): ISelectRole{
     type: 'SELECT_ROLE',
     roleKey,
     characterId  
+  }
+}
+
+export function inputDaysPerLoop(daysPerLoop:number):IInputDaysPerLoop{
+  return {
+    type: 'INPUT_DAYS_PER_LOOP',
+    daysPerLoop
   }
 }
 

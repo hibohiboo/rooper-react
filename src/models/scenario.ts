@@ -32,6 +32,11 @@ export class Scenario {
                public daysPerLoop: number = 6,
                ){
   }
+  public static create({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
+                        selectedIncidentLists, dayList, numberOfLoops, daysPerLoop}):Scenario{
+    return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
+                        selectedIncidentLists, dayList, numberOfLoops, daysPerLoop);
+  }
   /**
    * 選択中のキャラクターと役職を紐付けたリストを返す
    */

@@ -18,6 +18,8 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
       return toggleCharacter(state, action);
     case 'SELECT_ROLE':
       return selectRole(state, action);
+    case 'INPUT_DAYS_PER_LOOP':
+      return inputDaysPerLoop(state, action);
     default:
       return state
   }
@@ -101,6 +103,11 @@ function selectRole({characterList, selectedSet, selectedPlotList, selectedRoleL
     // それ以外の場合、キャラクター役職対応リストに追加
     const addedList = [...filterdList, {characterId, roleKey}];
     return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, addedList);
+}
+
+function inputDaysPerLoop(state, action){
+  state.daysPerLoop = action.daysPerLoop;
+  return Scenario.create(state);
 }
 
 export default scenario;
