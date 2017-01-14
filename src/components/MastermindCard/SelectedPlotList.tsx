@@ -4,7 +4,6 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 
 interface IPropsMainPlot extends Props<MainPlot>{
   name: string;
-  rules:any;
 };
 interface IState {};
 
@@ -18,19 +17,6 @@ class MainPlot extends React.Component<IPropsMainPlot, IState> {
         <TableRowColumn>
            {this.props.name}
         </TableRowColumn>
-        <TableHeaderColumn>
-           ルール
-        </TableHeaderColumn>
-        <TableRowColumn>
-           {this.props.rules.map((rule, i)=>{
-             return(
-              <dl key={i}>
-                <dt>{rule.type}:{rule.timing}</dt>
-                <dd>{rule.rule}</dd>
-              </dl>
-             )
-           })}
-        </TableRowColumn>
       </TableRow>
     );
   }
@@ -40,7 +26,6 @@ interface IPropsSubPlot extends Props<SubPlot>{
   name: string;
   num: number;
   maxNum: number;
-  rules:any;
 };
 
 const SubPlotHeader = ({maxNum, num}) => (
@@ -84,10 +69,10 @@ class SelectedPlotList extends React.Component<IProps, IState> {
     return (
       <Table>
         <TableBody>
-          <MainPlot name={this.props.mainPlot && this.props.mainPlot.name}  rules={this.props.mainPlot && this.props.mainPlot.rules || []}/>
+          <MainPlot name={this.props.mainPlot && this.props.mainPlot.name} />
           {
-            this.props.subPlotList.map((plot, i) =>{
-              return <SubPlot key={i} name={plot.name} num={i+1} maxNum={this.props.subPlotNum}  rules={plot.rules} />;
+            this.props.subPlotList.map((rule, i) =>{
+              return <SubPlot key={i} name={rule.name} num={i+1} maxNum={this.props.subPlotNum} />;
             }
           )}
         </TableBody>

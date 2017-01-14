@@ -15,8 +15,6 @@ store.dispatch(createScenario());
 (async ()=>{
   const set = await getTragedySet(TragedySetType.basic);
   store.dispatch(selectTragedySet(set));
-  store.dispatch(selectPlot({"num":1, "type":"M", "id":3,  "name":"僕と契約しようよ",     "roles":["キーパーソン"],                      "rules":[{"type":"敗北条件","timing":"ループ終了時","rule":"キーパーソンに[暗躍カウンター]が２個以上。"}, {"type":"強制","timing":"脚本作成時","rule":"キーパーソンは少女にしなくてはならない。"}]}
-));
 })();
 
 /**

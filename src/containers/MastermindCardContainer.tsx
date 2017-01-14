@@ -19,7 +19,7 @@ const mapStateToProps = (store:IState, ownProps) => {
   const {selectedSet, selectedPlotList, characterList, selectedRoleList, characterRoleList, selectedCharacterList } = scenario;
   const tragedySetName = selectedSet.name;
   const subPlotNum = selectedSet.subplotNum;
-console.log(selectedPlotList)
+
   return { 
     tragedySetName,
     selectedPlotList,
