@@ -1,6 +1,6 @@
 # docker-hubからnode入りコンテナを取得
 # https://hub.docker.com/_/node/
-FROM node:7.3.0
+FROM node:7.4.0
 
 # コンテナ上の作業ディレクトリ作成
 WORKDIR /my_webpack
@@ -23,10 +23,10 @@ RUN npm i --save axios
 RUN npm i --save-dev typescript@next
 
 # ビルドツール
-RUN npm i --save-dev webpack@2.2.0-rc.0
+RUN npm i --save-dev webpack@2.2.0
 
 # 開発用サーバ
-RUN npm i --save-dev webpack-dev-server@2.2.0-rc.0
+RUN npm i --save-dev webpack-dev-server@2.2.0
 
 # es6トランスパイラ
 RUN npm i --save babel-polyfill
