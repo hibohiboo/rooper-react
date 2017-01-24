@@ -18,8 +18,10 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
       return toggleCharacter(state, action);
     case 'SELECT_ROLE':
       return selectRole(state, action);
-    case 'INPUT_DAYS_PER_LOOP':
-      return inputDaysPerLoop(state, action);
+    case 'INPUT_DAYS_IN_ONE_LOOP':
+      return inputDaysInOneLoop(state, action);
+    case 'INPUT_NUMBER_OF_LOOPS':
+      return inputNumberOfLoops(state, action);
     default:
       return state
   }
@@ -93,20 +95,31 @@ function toggleCharacter({characterList, selectedSet,selectedPlotList,selectedRo
  */
 function selectRole({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList}, {roleKey, characterId}){
     // 既にキャラクターに役職が割り振られていたらキャラクター役職対応リストから取り除く
-    const filterdList = characterRoleList.filter(m=>m.characterId !== characterId);
+    const filteredList = characterRoleList.filter(m=>m.characterId !== characterId);
 
     // パーソンの役職の場合、キャラクター役職対応リストから取り除いたまま保存
     if(roleKey === 0){
-      return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, filterdList);
+      return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, filteredList);
     }
 
     // それ以外の場合、キャラクター役職対応リストに追加
-    const addedList = [...filterdList, {characterId, roleKey}];
+    const addedList = [...filteredList, {characterId, roleKey}];
     return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, addedList);
 }
 
-function inputDaysPerLoop(state, action){
-  state.daysPerLoop = action.daysPerLoop;
+/**
+ * 1ループ日数
+ */
+function inputDaysInOneLoop(state, action){
+  state.daysInOneLoop = action.daysInOneLoop;
+  return Scenario.create(state);
+}
+
+/**
+ * ループ数
+ */
+function inputNumberOfLoops(state, action){
+  state.numberOfLoops = action.numberOfLoops;
   return Scenario.create(state);
 }
 

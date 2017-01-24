@@ -29,13 +29,13 @@ export class Scenario {
                public selectedIncidentLists:any = [],
                public dayList=[],
                public numberOfLoops:number = 4,
-               public daysPerLoop: number = 6,
+               public daysInOneLoop: number = 6,
                ){
   }
   public static create({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
-                        selectedIncidentLists, dayList, numberOfLoops, daysPerLoop}):Scenario{
+                        selectedIncidentLists, dayList, numberOfLoops, daysInOneLoop}):Scenario{
     return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
-                        selectedIncidentLists, dayList, numberOfLoops, daysPerLoop);
+                        selectedIncidentLists, dayList, numberOfLoops, daysInOneLoop);
   }
   /**
    * 選択中のキャラクターと役職を紐付けたリストを返す

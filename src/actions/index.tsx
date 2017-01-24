@@ -5,7 +5,7 @@ import { SelectedPlot } from '../models/Plot';
 /**
  * シナリオ作成で使用されるアクション一覧
  */
-export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction | ISelectRole | IInputDaysPerLoop;
+export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction | ISelectRole | IInputDaysInOneLoop | IInputNumberOfLoops;
 
 export interface ICreateAction extends Action {
   type: 'CREATE_SCENARIO';
@@ -33,9 +33,14 @@ export interface ISelectRole extends Action{
   characterId:number;  
 }
 
-export interface IInputDaysPerLoop extends Action{
-  type: 'INPUT_DAYS_PER_LOOP';
-  daysPerLoop: number;
+export interface IInputDaysInOneLoop extends Action{
+  type: 'INPUT_DAYS_IN_ONE_LOOP';
+  daysInOneLoop: number;
+}
+
+export interface IInputNumberOfLoops extends Action{
+  type: 'INPUT_NUMBER_OF_LOOPS';
+  numberOfLoops: number;
 }
 
 let nextScenarioId:number = 0;
@@ -76,10 +81,17 @@ export function selectRole(roleKey:number, characterId:number): ISelectRole{
   }
 }
 
-export function inputDaysPerLoop(daysPerLoop:number):IInputDaysPerLoop{
+export function inputDaysInOneLoop(daysInOneLoop:number):IInputDaysInOneLoop{
   return {
-    type: 'INPUT_DAYS_PER_LOOP',
-    daysPerLoop
+    type: 'INPUT_DAYS_IN_ONE_LOOP',
+    daysInOneLoop
+  }
+}
+
+export function inputNumberOfLoops(numberOfLoops:number):IInputNumberOfLoops{
+  return {
+    type: 'INPUT_NUMBER_OF_LOOPS',
+    numberOfLoops
   }
 }
 
