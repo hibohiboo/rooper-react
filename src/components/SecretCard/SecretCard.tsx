@@ -14,7 +14,7 @@ interface IProps {
 
 interface IState {};
 
-class MastermindCard extends React.Component<IProps, IState> {
+class SecretCard extends React.Component<IProps, IState> {
   constructor(public props: IProps) {
     super(props);
   }
@@ -36,4 +36,4 @@ class MastermindCard extends React.Component<IProps, IState> {
   }
  }
 
- export default MastermindCard;
+ export default SecretCard;

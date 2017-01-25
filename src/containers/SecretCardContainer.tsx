@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import MastermindCard from '../components/MastermindCard';
+import SecretCard from '../components/SecretCard';
 import Scenario from '../models/Scenario';
 
 interface IState{
@@ -28,8 +28,8 @@ const mapStateToProps = (store:IState, ownProps) => {
   }
 }
 
-const MastermindCardContainer = connect(
+const SecretCardContainer = connect(
   mapStateToProps
-)(MastermindCard);
+)(SecretCard);
 
-export default MastermindCardContainer;
+export default SecretCardContainer;

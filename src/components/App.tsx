@@ -1,5 +1,6 @@
 import * as React from 'react';
-import MastermindCardContainer from '../containers/MastermindCardContainer';
+import SecretCardContainer from '../containers/SecretCardContainer';
+import OpenCardContainer from '../containers/OpenCardContainer';
 import InputForm from './InputForm/index';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
@@ -7,7 +8,10 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 const App = () => (
   <div>
     <InputForm />
-    <MastermindCardContainer />
+    <div style={{display:"flex"}} >
+        <SecretCardContainer />
+        <OpenCardContainer />
+    </div>
   </div>
 );
 
