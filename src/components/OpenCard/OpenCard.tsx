@@ -18,7 +18,7 @@ class OpenCard extends React.Component<IProps, IState> {
   }
   render(): JSX.Element{
     return (
-      <Card>
+      <Card style={{minWidth:"300px", maxWidth:"500px"}}>
         <CardHeader
           title={`公開シート`}
           subtitle={this.props.tragedySetName}

@@ -20,7 +20,7 @@ class SecretCard extends React.Component<IProps, IState> {
   }
   render(): JSX.Element{
     return (
-      <Card>
+      <Card style={{minWidth:"300px", maxWidth:"500px"}} expanded={true}>
         <CardHeader
           title={`非公開シート`}
           subtitle={this.props.tragedySetName}

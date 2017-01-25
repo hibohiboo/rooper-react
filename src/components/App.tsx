@@ -8,7 +8,7 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 const App = () => (
   <div>
     <InputForm />
-    <div style={{display:"flex"}} >
+    <div style={{display:"flex", flexWrap:"wrap"}} >
         <SecretCardContainer />
         <OpenCardContainer />
     </div>
