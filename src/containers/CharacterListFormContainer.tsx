@@ -47,9 +47,9 @@ const mapDispatchToProps = (dispatch):IDispatchToProps => {
   }
 }
 
-const TragedySetFormContainer = connect(
+const CharacterListFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(CharacterListForm);
 
-export default TragedySetFormContainer;
+export default CharacterListFormContainer;

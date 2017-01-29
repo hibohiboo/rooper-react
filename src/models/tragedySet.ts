@@ -6,7 +6,12 @@ export class TragedySet {
                public plotList: any = [],
                public subplotNum: number = 2,
                public roleList:any = [],
-               public incidentList:any = []){}
+               public incidentList:IIncident[] = []){}
+}
+export interface IIncident{
+  id:number;
+  name:string;
+  effect:string;
 }
 
 export enum TragedySetType {

@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Props, Component} from 'react';
-import TragedySetFormContainer from '../../containers/TragedySetFormContainer';
-import PlotFormContainer from '../../containers/PlotFormContainer';
 import {ICharacterWithRole} from '../../models/Scenario';
 import {CharacterType} from '../../models/Character';
 import RoleListForm from './RoleListForm';
 import IllegulerRoleListFormContainer from '../../containers/IllegulerRoleListFormContainer';
 import {List, ListItem} from 'material-ui/List';
 import Toggle from 'material-ui/Toggle';
-import MobileTearSheet from '../ui/MobileTearSheet';
+// import MobileTearSheet from '../ui/MobileTearSheet';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 interface IProps extends Props<CharacterListForm>{

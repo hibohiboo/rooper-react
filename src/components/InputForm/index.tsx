@@ -5,6 +5,7 @@ import PlotFormContainer from '../../containers/PlotFormContainer';
 import CharacterListFormContainer from '../../containers/CharacterListFormContainer';
 import DaysInOneLoopFormContainer from '../../containers/DaysInOneLoopFormContainer';
 import NumberOfLoopsFormContainer from '../../containers/NumberOfLoopsFormContainer';
+import IncidentListFormContainer from '../../containers/IncidentListFormContainer';
 
 
 interface IProps extends Props<InputForm>{
@@ -20,6 +21,7 @@ class InputForm extends React.Component<IProps, IState> {
         <CharacterListFormContainer />
         <DaysInOneLoopFormContainer />
         <NumberOfLoopsFormContainer />
+        <IncidentListFormContainer />
       </div>
     )
   }
