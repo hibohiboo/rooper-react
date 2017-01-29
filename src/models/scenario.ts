@@ -26,16 +26,16 @@ export class Scenario {
                public selectedRoleList:Role[] = [],
                public characterRoleList:ICharacterRoleAssociate[] = [],
               //  public selectedCharacterList: Character[] = [],
-               public selectedIncidentLists:any = [],
+               public selectedIncidentList:any = [],
                public dayList=[],
                public numberOfLoops:number = 4,
                public daysInOneLoop: number = 6,
                ){
   }
   public static create({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
-                        selectedIncidentLists, dayList, numberOfLoops, daysInOneLoop}):Scenario{
+                        selectedIncidentList, dayList, numberOfLoops, daysInOneLoop}):Scenario{
     return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
-                        selectedIncidentLists, dayList, numberOfLoops, daysInOneLoop);
+                        selectedIncidentList, dayList, numberOfLoops, daysInOneLoop);
   }
   /**
    * 選択中のキャラクターと役職を紐付けたリストを返す

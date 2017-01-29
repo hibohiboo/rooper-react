@@ -1,11 +1,19 @@
 import { Action } from 'redux';
-import { TragedySet } from '../models/TragedySet';
+import { TragedySet, IIncident } from '../models/TragedySet';
 import { SelectedPlot } from '../models/Plot';
 
 /**
  * シナリオ作成で使用されるアクション一覧
  */
-export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction | IToggleCharacterAction | ISelectRole | IInputDaysInOneLoop | IInputNumberOfLoops;
+export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction
+                            | IToggleCharacterAction | ISelectRole 
+                            | IInputDaysInOneLoop | IInputNumberOfLoops
+                            | ISelectIncident;
+
+// ******************************************************************************************************************
+// Interfaces
+// ******************************************************************************************************************
+
 
 export interface ICreateAction extends Action {
   type: 'CREATE_SCENARIO';
@@ -42,6 +50,16 @@ export interface IInputNumberOfLoops extends Action{
   type: 'INPUT_NUMBER_OF_LOOPS';
   numberOfLoops: number;
 }
+
+export interface ISelectIncident extends Action{
+  type: 'SELECT_INCIDENT';
+  day: number;
+  incidentId: number;
+}
+
+// ******************************************************************************************************************
+// Action
+//  ******************************************************************************************************************
 
 let nextScenarioId:number = 0;
 
@@ -94,6 +112,16 @@ export function inputNumberOfLoops(numberOfLoops:number):IInputNumberOfLoops{
     numberOfLoops
   }
 }
+
+export function selectIncident(day:number, incidentId: number):ISelectIncident{
+  return {
+    type: 'SELECT_INCIDENT',
+    day,
+    incidentId
+  }
+}
+
+
 
 export interface FETCH_GET_REQUEST extends Action{
   type: 'FETCH_GET_REQUEST'

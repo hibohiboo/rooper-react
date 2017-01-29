@@ -22,6 +22,8 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
       return inputDaysInOneLoop(state, action);
     case 'INPUT_NUMBER_OF_LOOPS':
       return inputNumberOfLoops(state, action);
+    case 'SELECT_INCIDENT':
+      return selectIncident(state, action);
     default:
       return state
   }
@@ -122,5 +124,20 @@ function inputNumberOfLoops(state, action){
   state.numberOfLoops = action.numberOfLoops;
   return Scenario.create(state);
 }
+
+/**
+ * 事件
+ */
+function selectIncident(state:Scenario, {day, incidentId}){
+  const before_list = state.selectedIncidentList;
+  const filteredList = before_list.filter(m=>m.day !== day);
+
+  if (incidentId !== 0) {
+    state.selectedIncidentList = [...filteredList , {day, incidentId}];
+  }
+
+  return Scenario.create(state);
+}
+
 
 export default scenario;

@@ -8,6 +8,9 @@ import MenuItem from 'material-ui/MenuItem';
 
 interface IProps extends Props<IncidentListForm>{
   incidentList:IIncident[];
+  daysInOneLoop:number;
+  onChangeIncident:any;
+  selectedIncidentList:any;
 }
 interface IState {}
 
@@ -20,29 +23,37 @@ const columnStyle = {
   width:"120px"
 }
 
-const Row = (incidentList, i:number) => (
-  <TableRow  key={i}>
-            <TableRowColumn style={dayColumnStyle}>
-              {i+1}
-            </TableRowColumn>
-            <TableRowColumn style={columnStyle}>
-              <SelectField>
-                <MenuItem value={0} label={`パーソン`}>
-                  事件なし
-                </MenuItem>
-                {incidentList.map(incident =>
-                  <MenuItem key={incident.id} value={incident.id} label={incident.name}>
-                    {incident.name}
+
+const Row = (onChangeIncident, incidentList:IIncident[], day:number, selectedIncidentId) => {
+  const handleChange = (event, index, value) => {
+      const incidentId = parseInt(value, 10);
+      onChangeIncident(day, incidentId);
+  };
+  return (
+    <TableRow  key={day}>
+              <TableRowColumn style={dayColumnStyle}>
+                {day}
+              </TableRowColumn>
+              <TableRowColumn style={columnStyle}>
+                <SelectField value={selectedIncidentId}
+                             onChange={handleChange}>
+                  <MenuItem value={0} label={`事件なし`}>
+                    事件なし
                   </MenuItem>
-                )}
-              </SelectField>
-            </TableRowColumn>
-            <TableRowColumn style={columnStyle}>
-            </TableRowColumn>
-            <TableRowColumn>
-            </TableRowColumn>  
-  </TableRow>
-);
+                  {incidentList.map(incident =>
+                    <MenuItem key={incident.id} value={incident.id} label={incident.name}>
+                      {incident.name}
+                    </MenuItem>
+                  )}
+                </SelectField>
+              </TableRowColumn>
+              <TableRowColumn style={columnStyle}>
+              </TableRowColumn>
+              <TableRowColumn>
+              </TableRowColumn>  
+    </TableRow>
+  )
+};
 
 export default class IncidentListForm extends React.Component<IProps, IState> {
   handleToggle = (event, toggled) => {
@@ -50,8 +61,22 @@ export default class IncidentListForm extends React.Component<IProps, IState> {
   };
   render(): JSX.Element{
     const rows = [];
-    for(let i=0; i<8;i++){
-      rows.push(Row(this.props.incidentList, i));
+    console.log(this.props.selectedIncidentList);
+
+    // 各行の事件・犯人を作成
+    for(let i=0; i<this.props.daysInOneLoop;i++){
+      let selectedIncidentId = 0;
+      const incident = this.props.selectedIncidentList.find(incident=>incident.day === i+1);
+      if(incident){
+        selectedIncidentId = incident.incidentId;
+      }
+      rows.push(
+        Row(
+            this.props.onChangeIncident,
+            this.props.incidentList, 
+            i+1,
+            selectedIncidentId)
+      );
     }
 
     return (
@@ -61,8 +86,8 @@ export default class IncidentListForm extends React.Component<IProps, IState> {
             adjustForCheckbox={false}
           >
             <TableRow>
-              <TableHeaderColumn>日数</TableHeaderColumn>
-              <TableHeaderColumn>事件</TableHeaderColumn>
+              <TableHeaderColumn style={dayColumnStyle}>日数</TableHeaderColumn>
+              <TableHeaderColumn style={columnStyle}>事件</TableHeaderColumn>
               <TableHeaderColumn>犯人</TableHeaderColumn>
               <TableHeaderColumn>効果</TableHeaderColumn>
             </TableRow>

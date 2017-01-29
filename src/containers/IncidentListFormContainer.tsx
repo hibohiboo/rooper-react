@@ -3,17 +3,19 @@ import { connect } from 'react-redux';
 import IncidentListForm from '../components/InputForm/IncidentListForm';
 import {Scenario} from '../models/Scenario';
 import {IIncident} from '../models/TragedySet';
-// import { toggleCharacter, selectRole  } from '../actions';
+import { selectIncident  } from '../actions';
 interface IState{}
 
 interface IProps{}
 
 interface IStateToProps{
   incidentList:IIncident[];
+  daysInOneLoop:number;
+  selectedIncidentList;
 }
 
 interface IDispatchToProps{
-
+  onChangeIncident:any;
 }
 
 /**
@@ -23,18 +25,25 @@ const mapStateToProps = (store):IStateToProps => {
   const scenario:Scenario = store.scenario;
   if(!scenario){
       return { 
-        incidentList:[]
+        incidentList:[],
+        daysInOneLoop:0,
+        selectedIncidentList:[]
     }
   }
   const {incidentList} = scenario.selectedSet;
-
+  const {daysInOneLoop, selectedIncidentList} = scenario;
   return {
-            incidentList
+            incidentList,
+            selectedIncidentList,
+            daysInOneLoop
           };
 }
 
 const mapDispatchToProps = (dispatch):IDispatchToProps => {
   return {
+    onChangeIncident: (day, incidentId)=>{
+       dispatch(selectIncident(day, incidentId));
+    }
   }
 }
 
