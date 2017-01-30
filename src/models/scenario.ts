@@ -33,7 +33,8 @@ export class Scenario {
                ){
   }
   public static create({characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
-                        selectedIncidentList, dayList, numberOfLoops, daysInOneLoop}):Scenario{
+                        selectedIncidentList, dayList, numberOfLoops, daysInOneLoop}):Scenario
+  {
     return new Scenario(characterList, selectedSet, selectedPlotList, selectedRoleList, characterRoleList,
                         selectedIncidentList, dayList, numberOfLoops, daysInOneLoop);
   }
@@ -89,6 +90,16 @@ export class Scenario {
     const filter = role => selectedRoleList.findIndex(r=>r.id === role.id) === -1;
     return roleList.filter(filter);
   }
+
+  /**
+   * 犯人に割り振られていないキャラクターを選択する
+   */
+  get unallocateCulpritList(){
+    const {selectedCharacterList, selectedIncidentList} = this;
+    const culpritIdList = selectedIncidentList.map(incident => incident.culpritId);
+    return selectedCharacterList.filter(char=>culpritIdList.findIndex(id=>id === char.id) === -1);
+  }
 }
+
 
 export default Scenario;

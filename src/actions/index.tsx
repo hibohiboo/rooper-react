@@ -8,7 +8,7 @@ import { SelectedPlot } from '../models/Plot';
 export type ScenarioActions = ICreateAction | ISelectTragedySetAction | ISelectPlotAction
                             | IToggleCharacterAction | ISelectRole 
                             | IInputDaysInOneLoop | IInputNumberOfLoops
-                            | ISelectIncident;
+                            | ISelectIncident | ISelectCulprit;
 
 // ******************************************************************************************************************
 // Interfaces
@@ -56,6 +56,13 @@ export interface ISelectIncident extends Action{
   day: number;
   incidentId: number;
 }
+
+export interface ISelectCulprit extends Action{
+  type: 'SELECT_CULPRIT';
+  day: number;
+  culpritId: number;
+}
+
 
 // ******************************************************************************************************************
 // Action
@@ -121,6 +128,13 @@ export function selectIncident(day:number, incidentId: number):ISelectIncident{
   }
 }
 
+export function selectCulprit(day:number, culpritId: number):ISelectCulprit{
+  return {
+    type: 'SELECT_CULPRIT',
+    day,
+    culpritId
+  }
+}
 
 
 export interface FETCH_GET_REQUEST extends Action{

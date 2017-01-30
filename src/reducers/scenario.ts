@@ -24,6 +24,8 @@ const scenario = (state:Scenario = new Scenario, action?: ScenarioActions) => {
       return inputNumberOfLoops(state, action);
     case 'SELECT_INCIDENT':
       return selectIncident(state, action);
+    case 'SELECT_CULPRIT':
+      return selectCulprit(state, action);
     default:
       return state
   }
@@ -139,5 +141,21 @@ function selectIncident(state:Scenario, {day, incidentId}){
   return Scenario.create(state);
 }
 
+/**
+ * 犯人
+ */
+function selectCulprit(state:Scenario, {day, culpritId}){
+  const incident = state.selectedIncidentList.find(item => item.day === day);
+  const before_list = state.selectedIncidentList;
+  const filteredList = before_list.filter(m=>m.day !== day);
+  const incidentId = incident.incidentId;
+
+  if(culpritId !==0 ){
+    state.selectedIncidentList = [...filteredList , {day, incidentId, culpritId}];
+  }else{
+    state.selectedIncidentList = [...filteredList , {day, incidentId}];
+  }
+  return Scenario.create(state);
+}
 
 export default scenario;

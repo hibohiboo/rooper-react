@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import IncidentListForm from '../components/InputForm/IncidentListForm';
 import {Scenario} from '../models/Scenario';
 import {IIncident} from '../models/TragedySet';
-import { selectIncident  } from '../actions';
+import { selectIncident, selectCulprit  } from '../actions';
 interface IState{}
 
 interface IProps{}
@@ -12,10 +12,13 @@ interface IStateToProps{
   incidentList:IIncident[];
   daysInOneLoop:number;
   selectedIncidentList;
+  unallocateCulpritList;
+  selectedCharacterList;
 }
 
 interface IDispatchToProps{
   onChangeIncident:any;
+  onChangeCulprit:any;
 }
 
 /**
@@ -27,15 +30,19 @@ const mapStateToProps = (store):IStateToProps => {
       return { 
         incidentList:[],
         daysInOneLoop:0,
-        selectedIncidentList:[]
+        selectedIncidentList:[],
+        unallocateCulpritList:[],
+        selectedCharacterList:[]
     }
   }
   const {incidentList} = scenario.selectedSet;
-  const {daysInOneLoop, selectedIncidentList} = scenario;
+  const {daysInOneLoop, selectedIncidentList, unallocateCulpritList, selectedCharacterList} = scenario;
   return {
             incidentList,
             selectedIncidentList,
-            daysInOneLoop
+            daysInOneLoop,
+            unallocateCulpritList,
+            selectedCharacterList
           };
 }
 
@@ -43,6 +50,9 @@ const mapDispatchToProps = (dispatch):IDispatchToProps => {
   return {
     onChangeIncident: (day, incidentId)=>{
        dispatch(selectIncident(day, incidentId));
+    },
+    onChangeCulprit: (day, culpritId)=>{
+      dispatch(selectCulprit(day, culpritId));
     }
   }
 }
