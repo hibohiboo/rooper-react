@@ -148,7 +148,7 @@ function selectCulprit(state:Scenario, {day, culpritId}){
   const incident = state.selectedIncidentList.find(item => item.day === day);
   const before_list = state.selectedIncidentList;
   const filteredList = before_list.filter(m=>m.day !== day);
-  const incidentId = incident.incidentId;
+  const {incidentId} = incident;
 
   if(culpritId !==0 ){
     state.selectedIncidentList = [...filteredList , {day, incidentId, culpritId}];

@@ -24,7 +24,8 @@ const dayColumnStyle={ width:"50px",
                 textAlign:"center"};
                 
 const columnStyle = {
-  width:"120px"
+  width:"120px",
+  paddingLeft:"10px"
 }
 
 /**
@@ -36,7 +37,6 @@ const Row = ( onChangeIncident,
               day:number, 
               selectedIncidentId:number,
               selectedCulpritId:number,
-              selectedIncidentEffect:string,
               onChangeCulprit ) => {
   const handleChange = (event, index, value) => {
       const incidentId = parseInt(value, 10);
@@ -82,9 +82,10 @@ const Row = ( onChangeIncident,
                     </SelectField>
                 }
               </TableRowColumn>
-              <TableRowColumn>
-                {selectedIncidentEffect}
-              </TableRowColumn>  
+              {// <TableRowColumn>
+              //   {!selectedIncidentId ? "" : incidentList.find(incident=>incident.id === selectedIncidentId).effect}
+              // </TableRowColumn>
+              }
     </TableRow>
   )
 };
@@ -111,7 +112,6 @@ export default class IncidentListForm extends React.Component<IProps, IState> {
       if(incident){
         selectedIncidentId = incident.incidentId;
         selectedCulpritId = incident.culpritId || 0;
-        selectedIncidentEffect = incident.effect;
         culprit = this.props.selectedCharacterList.find(char=>char.id === selectedCulpritId);
         unallocateCulpritList = culprit ? [...unallocateCulpritList, culprit] : unallocateCulpritList;
       }
@@ -124,7 +124,6 @@ export default class IncidentListForm extends React.Component<IProps, IState> {
             i+1,
             selectedIncidentId,
             selectedCulpritId,
-            selectedIncidentEffect,
             this.props.onChangeCulprit)
       );
     }
@@ -139,7 +138,8 @@ export default class IncidentListForm extends React.Component<IProps, IState> {
               <TableHeaderColumn style={dayColumnStyle}>日数</TableHeaderColumn>
               <TableHeaderColumn style={columnStyle}>事件</TableHeaderColumn>
               <TableHeaderColumn style={columnStyle}>犯人</TableHeaderColumn>
-              <TableHeaderColumn>効果</TableHeaderColumn>
+              {// <TableHeaderColumn>効果</TableHeaderColumn>
+                }
             </TableRow>
           </TableHeader>
           <TableBody
